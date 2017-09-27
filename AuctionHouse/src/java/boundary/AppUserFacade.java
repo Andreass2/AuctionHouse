@@ -6,6 +6,7 @@
 package boundary;
 
 import entities.AppUser;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +30,14 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
         super(AppUser.class);
     }
     
+    public AppUser Login(String email, String password){
+        //AppUser user = (AppUser) em.createQuery("SELECT * FROM AppUser WHERE email = " + email + ";").getSingleResult();
+        //List<AppUser> users = this.findAll();
+        /*if(user != null && user.getPassword().equals(password)){
+            return user;
+        }else{
+            return null;
+        }*/
+        return null;
+    }
 }

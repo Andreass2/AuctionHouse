@@ -8,9 +8,9 @@
     <h:body>
         <div style="border:1px solid black; padding:10px; float: left" >
             <h:form>
-                <h:outputLabel value="Username:"/><h:inputText value=""/><br/><br/>
-                <h:outputLabel value="Password: "/><h:inputText value=""/><br/><br/>
-                <h:commandButton  value="Login"/>
+                <h:outputLabel value="Username:"/><h:inputText value="#{loginView.user.email}"/><br/><br/>
+                <h:outputLabel value="Password: "/><h:inputText value="#{loginView.user.password}"/><br/><br/>
+                <h:commandButton action="#{loginView.login}" value="Login"/>
             </h:form>
         </div>
     </h:body>

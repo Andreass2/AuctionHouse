@@ -35,4 +35,12 @@ public class LoginView {
         return "login";
     }
     
+    public String login(){
+        if(userFacade.findAll() != null){
+            return "userPage";
+        }else{
+            return "login";
+        }
+    }
+    
 }
