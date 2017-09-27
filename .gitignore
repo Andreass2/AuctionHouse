@@ -26,16 +26,17 @@ tomcat
 target/
 
 # NetBeans specific
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
+/AuctionHouse/nbproject/
+/AuctionHouse/build/
+/AuctionHouse/nbbuild/
+/AuctionHouse/dist/
+/AuctionHouse/nbdist/
+/AuctionHouse/nbactions.xml
+/AuctionHouse/nb-configuration.xml
 
 # Misc
 *.swp
 release.properties
 pom.xml.releaseBackup
 pom.xml.tag
+/AuctionHouse/build.xml
