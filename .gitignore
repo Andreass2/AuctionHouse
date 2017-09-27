@@ -26,7 +26,7 @@ tomcat
 target/
 
 # NetBeans specific
-/AuctionHouse/nbproject/
+/AuctionHouse/nbproject/private/
 /AuctionHouse/build/
 /AuctionHouse/nbbuild/
 /AuctionHouse/dist/
