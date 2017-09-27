@@ -34,10 +34,10 @@ target/
 /AuctionHouse/nbdist/
 /AuctionHouse/nbactions.xml
 /AuctionHouse/nb-configuration.xml
+/AuctionHouse/build.xml
 
 # Misc
 *.swp
 release.properties
 pom.xml.releaseBackup
 pom.xml.tag
-/AuctionHouse/build.xml
