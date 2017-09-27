@@ -27,6 +27,7 @@ target/
 
 # NetBeans specific
 /AuctionHouse/nbproject/private/
+/AuctionHouse/nbproject/project.properties
 /AuctionHouse/build/
 /AuctionHouse/nbbuild/
 /AuctionHouse/dist/
