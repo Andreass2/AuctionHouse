@@ -32,10 +32,12 @@ public class AuctionFacade extends AbstractFacade<Auction> {
         super(Auction.class);
     }
     
-  public List<Auction> AAfindAllAuctions() {
-      TypedQuery<Auction> a = em.createQuery("SELECT * FROM auction;",Auction.class);
-      List<Auction> aa=(List<Auction>) a;
-    return  aa;
+  /*
+    returns all auctions by a specific user queryed by id
+    */
+  public List<Auction> findYourAuctions(int ownerId) {
+     List<Auction> list= (List<Auction>)em.createQuery("SELECT a FROM Auction a WHERE auctionowner_id="+ownerId).getResultList();
+    return  list;
   }
     
  

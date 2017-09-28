@@ -22,9 +22,19 @@ public class LoginView {
     @EJB
     private AppUserFacade userFacade;
     private AppUser user;
+    private String loginBarStatus; 
+
+    public String getLoginBarStatus() {
+        return loginBarStatus;
+    }
+
+    public void setLoginBarStatus(String loginBarStatus) {
+        this.loginBarStatus = loginBarStatus;
+    }
 
     public LoginView() {
         this.user = new AppUser();
+        loginBarStatus="log in";
     }
     
     public AppUser getUser(){
@@ -37,10 +47,12 @@ public class LoginView {
     
     public String login(){
         if(userFacade.findAll() != null){
-            return "userPage";
+            loginBarStatus="log out";
+            return "index";
         }else{
             return "login";
         }
     }
+    
     
 }

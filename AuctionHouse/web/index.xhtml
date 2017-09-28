@@ -7,8 +7,9 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:commandButton action="#{loginView.goToLogin}" value="Login"></h:commandButton>
+            <h:commandButton action="#{loginView.goToLogin}" value="#{loginView.loginBarStatus}"></h:commandButton>
             <h:commandButton action="#{auctionSchemaView.goToNewAuction}" value="Create Auction"></h:commandButton>
+            <h:commandButton action="#{auctionSchemaView.goToYourAuctions}" value="Your Auctions"></h:commandButton>
         </h:form>
         <h1>Auction House</h1>
         <br />

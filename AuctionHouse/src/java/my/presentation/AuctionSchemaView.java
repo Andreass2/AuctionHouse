@@ -51,11 +51,8 @@ public class AuctionSchemaView {
        return auctionFacade.findAll().size();
     }
     
-      // Returns the total number of auctions
+      // Returns all auctions
     public List<Auction> getAllAuctions(){
-        /*TODO
-        FIKSE AUCTIONFACADE MED RIKTIG QUERRY OG RETURN TYPE??
-        */
        return auctionFacade.findAllAuctions();
     }
     
@@ -63,6 +60,16 @@ public class AuctionSchemaView {
     public String postAuction(){
        this.auctionFacade.create(auction);
        return "index";
+    }
+    
+            
+      //send user to auctionSchema.xhtml if user is authorized
+    public String goToYourAuctions(){
+        //TODO check if user is logged in or not. true if logged in
+        boolean loggedIn=true;
+  
+        String uri=(loggedIn)?"yourAuctions":"login";      
+        return uri;
     }
     
     
