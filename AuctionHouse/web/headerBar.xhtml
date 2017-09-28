@@ -6,7 +6,8 @@
       
       <h:form>
           <h:commandButton action="#{homeView.goToHome}" value="Home"></h:commandButton>
-            <h:commandButton action="#{loginView.goToLogin}" value="#{loginView.loginBarStatus}"></h:commandButton>
+            <h:commandButton action="#{loginView.goToLogin}" value="login" rendered="#{!loginView.loggedIn}"></h:commandButton>
+            <h:commandButton action="#{loginView.logout}" value="log out" rendered="#{loginView.loggedIn}"></h:commandButton>
             <h:commandButton action="#{auctionSchemaView.goToNewAuction}" value="Create Auction"></h:commandButton>
             <h:commandButton action="#{yourAuctionsView.goToYourAuctions}" value="Your Auctions"></h:commandButton>
         </h:form>

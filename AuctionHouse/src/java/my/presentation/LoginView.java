@@ -38,6 +38,14 @@ public class LoginView {
         loginBarStatus="log in";
         loggedIn = false;
     }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
     
     public AppUser getUser(){
         return user;
@@ -55,6 +63,11 @@ public class LoginView {
         }else{
             return "login";
         }
+    }
+    public String logout(){
+        user = null; 
+        loggedIn = false;
+        return "login";
     }
     
     
