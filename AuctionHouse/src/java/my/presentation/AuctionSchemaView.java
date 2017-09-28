@@ -5,9 +5,14 @@
  */
 package my.presentation;
 
+
 import entities.Auction;
+import boundary.AuctionFacade;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+
 
 /**
  *
@@ -16,7 +21,8 @@ import javax.enterprise.context.RequestScoped;
 @Named(value = "auctionSchemaView")
 @RequestScoped
 public class AuctionSchemaView {
-
+    @EJB
+    AuctionFacade auctionFacade;
     Auction auction;
    
     /**
@@ -40,11 +46,22 @@ public class AuctionSchemaView {
         return auction;
     }
     
+     // Returns the total number of auctions
+    public int getNumberOfAuctions(){
+       return auctionFacade.findAll().size();
+    }
+    
+      // Returns the total number of auctions
+    public List<Auction> getAllAuctions(){
+        /*TODO
+        FIKSE AUCTIONFACADE MED RIKTIG QUERRY OG RETURN TYPE??
+        */
+       return auctionFacade.findAllAuctions();
+    }
+    
      // Saves the auctions and then returns the string path "index"
     public String postAuction(){
-        /*TODO riktig facede for å lage auction
-       this.messageFacade.create(message);
-       */
+       this.auctionFacade.create(auction);
        return "index";
     }
     

@@ -6,9 +6,12 @@
 package boundary;
 
 import entities.Auction;
+
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -29,4 +32,19 @@ public class AuctionFacade extends AbstractFacade<Auction> {
         super(Auction.class);
     }
     
+  public List<Auction> AAfindAllAuctions() {
+      TypedQuery<Auction> a = em.createQuery("SELECT * FROM auction;",Auction.class);
+      List<Auction> aa=(List<Auction>) a;
+    return  aa;
+  }
+    
+ 
+
+  /*
+  returns all auctions. SELECT * FROM auction did not work.
+  */
+  public List<Auction> findAllAuctions() {
+    return (List<Auction>)em.createQuery("SELECT a FROM Auction a").getResultList();
+    }
+  
 }

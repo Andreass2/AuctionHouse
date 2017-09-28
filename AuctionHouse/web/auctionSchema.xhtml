@@ -7,10 +7,8 @@
     </h:head>
     <h:body>
          <h:form>
-                <h:outputLabel value="Message:"/>
-                <h:outputLabel value="#{auctionSchemaView.auction.owner}"/>
-                
-                <h:inputText value="#{auctionSchemaView.auction.owner}"/>
+                <h:outputLabel value="CREATOR"/>
+                <h:inputText value="#{auctionSchemaView.auction.auctionName}"/> 
                 <h:commandButton action="#{auctionSchemaView.postAuction()}" value="Post Auction"/>
             </h:form>
     </h:body>

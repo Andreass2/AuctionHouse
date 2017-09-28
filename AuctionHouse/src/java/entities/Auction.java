@@ -13,7 +13,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author fredrik
+ * @author addi2
  */
 @Entity
 public class Auction implements Serializable {
@@ -21,7 +21,26 @@ public class Auction implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long id; 
+    private AppUser auctionOwner;
+    private String auctionName;
+    
+    public String getAuctionName() {
+        return auctionName;
+    }
+
+    public void setAuctionName(String auctionName) {
+        this.auctionName = auctionName;
+    }
+
+    public AppUser getAuctionOwner() {
+        return auctionOwner;
+    }
+
+    public void setAuctionOwner(AppUser auctionOwner) {
+        this.auctionOwner = auctionOwner;
+    }
+
 
     public Long getId() {
         return id;
