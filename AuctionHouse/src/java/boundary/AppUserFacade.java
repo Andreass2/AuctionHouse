@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -31,13 +32,17 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
     }
     
     public AppUser Login(String email, String password){
-        //AppUser user = (AppUser) em.createQuery("SELECT * FROM AppUser WHERE email = " + email + ";").getSingleResult();
-        //List<AppUser> users = this.findAll();
-        /*if(user != null && user.getPassword().equals(password)){
-            return user;
-        }else{
-            return null;
-        }*/
+        if(email != "" && password != ""){
+            Query query = em.createQuery("SELECT u FROM AppUser u WHERE u.email LIKE ?1");
+            query.setParameter(1, email);
+            query.setMaxResults(1);
+            List list = query.getResultList();
+            if(list == null || list.isEmpty() || !((AppUser) list.get(0)).getPassword().equals(password)){
+                return null;
+            }
+            return (AppUser) list.get(0);
+            
+        }
         return null;
     }
 }

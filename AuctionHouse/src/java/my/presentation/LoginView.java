@@ -23,6 +23,7 @@ public class LoginView {
     private AppUserFacade userFacade;
     private AppUser user;
     private String loginBarStatus; 
+    private boolean loggedIn;
 
     public String getLoginBarStatus() {
         return loginBarStatus;
@@ -35,6 +36,7 @@ public class LoginView {
     public LoginView() {
         this.user = new AppUser();
         loginBarStatus="log in";
+        loggedIn = false;
     }
     
     public AppUser getUser(){
@@ -46,8 +48,9 @@ public class LoginView {
     }
     
     public String login(){
-        if(userFacade.findAll() != null){
+        if(userFacade.Login(user.getEmail(), user.getPassword()) != null){
             loginBarStatus="log out";
+            loggedIn = true;
             return "index";
         }else{
             return "login";
