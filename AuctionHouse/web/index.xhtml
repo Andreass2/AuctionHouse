@@ -1,32 +1,29 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Auction House</title>
     </h:head>
     <h:body>
-        <h:form>
-            <h:commandButton action="#{loginView.goToLogin}" value="#{loginView.loginBarStatus}"></h:commandButton>
-            <h:commandButton action="#{auctionSchemaView.goToNewAuction}" value="Create Auction"></h:commandButton>
-            <h:commandButton action="#{auctionSchemaView.goToYourAuctions}" value="Your Auctions"></h:commandButton>
-        </h:form>
+        <ui:include src="headerBar.xhtml"></ui:include>
         <h1>Auction House</h1>
         <br />
         <h:outputLabel value="Total number of auctions:"/>
-        <h:outputText value="#{auctionSchemaView.numberOfAuctions}"/>
+        <h:outputText value="#{homeView.numberOfAuctions}"/>
         <br />
         <h2> Auctions</h2>
         <input placeholder="Search Auctions" />
         <br/>
         
         <ui:repeat xmlns:ui="http://java.sun.com/jsf/facelets"
-                   value="#{auctionSchemaView.allAuctions}" var="auction">
+                   value="#{homeView.allAuctions}" var="auction">
             #{auction.auctionName}
             <br/>
         </ui:repeat>
         
-        <h:dataTable value="#{auctionSchemaView.allAuctions}" var="item">
+        <h:dataTable value="#{homeView.allAuctions}" var="item">
             #{item.auctionName}
         </h:dataTable>
         

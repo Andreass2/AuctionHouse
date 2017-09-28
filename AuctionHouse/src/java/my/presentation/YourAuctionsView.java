@@ -35,4 +35,14 @@ public class YourAuctionsView {
        return auctionFacade.findYourAuctions(ownerId);
     }
     
+       //send user to auctionSchema.xhtml if user is authorized
+    public String goToYourAuctions(){
+        //TODO check if user is logged in or not. true if logged in
+        boolean loggedIn=true;
+  
+        String uri=(loggedIn)?"yourAuctions":"login";      
+        return uri;
+    }
+    
+    
 }

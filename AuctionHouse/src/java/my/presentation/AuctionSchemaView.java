@@ -8,7 +8,6 @@ package my.presentation;
 
 import entities.Auction;
 import boundary.AuctionFacade;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -46,15 +45,7 @@ public class AuctionSchemaView {
         return auction;
     }
     
-     // Returns the total number of auctions
-    public int getNumberOfAuctions(){
-       return auctionFacade.findAll().size();
-    }
     
-      // Returns all auctions
-    public List<Auction> getAllAuctions(){
-       return auctionFacade.findAllAuctions();
-    }
     
      // Saves the auctions and then returns the string path "index"
     public String postAuction(){
@@ -62,15 +53,6 @@ public class AuctionSchemaView {
        return "index";
     }
     
-            
-      //send user to auctionSchema.xhtml if user is authorized
-    public String goToYourAuctions(){
-        //TODO check if user is logged in or not. true if logged in
-        boolean loggedIn=true;
-  
-        String uri=(loggedIn)?"yourAuctions":"login";      
-        return uri;
-    }
     
-    
+              
 }
