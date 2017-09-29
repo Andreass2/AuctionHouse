@@ -74,6 +74,10 @@ public class LoginView {
         return "login";
     }
     
+    public String goToSignUp(){
+        return "signup";
+    }
+    
     public String login(){
         AppUser authorizedUser = userFacade.Login(user.getEmail(), user.getPassword());
         if(authorizedUser != null){

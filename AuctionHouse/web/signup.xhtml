@@ -8,16 +8,17 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>Login</title>
+        <title>Sign up</title>
     </h:head>
     <h:body>
-                <ui:include src="headerBar.xhtml"></ui:include>
+        <ui:include src="headerBar.xhtml"></ui:include>
         <div style="border:1px solid black; padding:10px; float: left; margin-left: 10px" >
+            <h1>Register</h1>
             <h:form>
-                <h1>Login</h1>
-                <h:outputLabel value="Username:"/><h:inputText class="form-control" value="#{loginView.user.email}"/><br/><br/>
-                <h:outputLabel value="Password: "/><h:inputSecret class="form-control" value="#{loginView.user.password}"/><br/><br/>
-                <h:commandButton class="btn btn" action="#{loginView.login}" value="Login"/>
+                <h:outputLabel value="Username:"/><h:inputText class="form-control" value="#{loginView.newUser.email}"/><br/><br/>
+                <h:outputLabel value="Password: "/><h:inputSecret class="form-control" value="#{loginView.newUser.password}"/><br/><br/>
+                <h:outputLabel value="Password: "/><h:inputSecret class="form-control" value="#{loginView.newUserPassword2}"/><br/><br/>
+                <h:commandButton class="btn btn" action="#{loginView.register}" value="Login"/>
             </h:form>
         </div>
     </h:body>
