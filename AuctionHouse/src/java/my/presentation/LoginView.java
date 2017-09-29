@@ -21,7 +21,7 @@ public class LoginView {
 
     @EJB
     private AppUserFacade userFacade;
-    private AppUser user;
+    private static AppUser user;
     private String loginBarStatus; 
     private boolean loggedIn;
 
@@ -47,7 +47,7 @@ public class LoginView {
         this.loggedIn = loggedIn;
     }
     
-    public AppUser getUser(){
+    public static AppUser getUser(){
         return user;
     }
     
@@ -56,11 +56,14 @@ public class LoginView {
     }
     
     public String login(){
-        if(userFacade.Login(user.getEmail(), user.getPassword()) != null){
+        AppUser authorizedUser = userFacade.Login(user.getEmail(), user.getPassword());
+        if(authorizedUser != null){
+            user = authorizedUser;
             loginBarStatus="log out";
             loggedIn = true;
             return "index";
         }else{
+            user = new AppUser();
             return "login";
         }
     }

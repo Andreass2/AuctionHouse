@@ -7,6 +7,7 @@ package my.presentation;
 
 
 import entities.Auction;
+import entities.AppUser;
 import boundary.AuctionFacade;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -40,7 +41,7 @@ public class AuctionSchemaView {
         return uri;
     }
     
-    //gives faclets acces to write data to entit object
+    //gives faclets acces to write data to entity object
     public Auction getAuction(){
         return auction;
     }
@@ -49,8 +50,15 @@ public class AuctionSchemaView {
     
      // Saves the auctions and then returns the string path "index"
     public String postAuction(){
-       this.auctionFacade.create(auction);
-       return "index";
+        AppUser user = LoginView.getUser();
+        if(user != null){
+            auction.setStatus(true);
+            auction.setBid(0);    
+            auction.setAuctionOwner(user);
+            this.auctionFacade.create(auction);
+            return "index";
+        }
+        return "login";
     }
     
     
