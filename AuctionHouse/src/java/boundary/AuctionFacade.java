@@ -11,7 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 
 /**
  *
@@ -35,10 +35,12 @@ public class AuctionFacade extends AbstractFacade<Auction> {
   /*
     returns all auctions by a specific user queryed by id
     */
-  public List<Auction> findYourAuctions(int ownerId) {
-     List<Auction> list= (List<Auction>)em.createQuery("SELECT a FROM Auction a WHERE auctionowner_id="+ownerId).getResultList();
-    return  list;
-  }
+    public List<Auction> findYourAuctions(long ownerId) {
+        Query query = em.createQuery("SELECT a FROM Auction a WHERE a.auctionOwner.id = ?1");
+        query.setParameter(1, ownerId);
+        List<Auction> list= query.getResultList();
+        return  list;
+    }
     
  
 

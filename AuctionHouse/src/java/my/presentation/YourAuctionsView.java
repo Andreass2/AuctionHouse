@@ -31,7 +31,7 @@ public class YourAuctionsView {
     
       // Returns all auctions
     public List<Auction> getYourAuctions(){
-        int ownerId=1;
+        long ownerId=1;
        return auctionFacade.findYourAuctions(ownerId);
     }
     
