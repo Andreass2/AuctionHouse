@@ -14,7 +14,7 @@
             <ui:include src="headerBar.xhtml"></ui:include>
          <h:form>
                 <h:outputLabel value="CREATOR"/>
-                <h:inputText value="#{auctionSchemaView.auction.auctionName}"/> 
+                <h:inputText class="form-control" style="width:20%" value="#{auctionSchemaView.auction.auctionName}"/> 
                 <h:commandButton class="btn btn" action="#{auctionSchemaView.postAuction()}" value="Post Auction"/>
             </h:form>
     </h:body>
