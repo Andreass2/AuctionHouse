@@ -14,9 +14,19 @@
                 <ui:include src="headerBar.xhtml"></ui:include>
         <div style="border:1px solid black; padding:10px; float: left" >
             <h:form>
+                <h1>Login</h1>
                 <h:outputLabel value="Username:"/><h:inputText value="#{loginView.user.email}"/><br/><br/>
                 <h:outputLabel value="Password: "/><h:inputText value="#{loginView.user.password}"/><br/><br/>
                 <h:commandButton action="#{loginView.login}" value="Login"/>
+            </h:form>
+        </div>
+          <div style="border:1px solid black; padding:10px; float: right" >
+            <h1>Register</h1>
+            <h:form>
+                <h:outputLabel value="Username:"/><h:inputText value="#{loginView.newUser.email}"/><br/><br/>
+                <h:outputLabel value="Password: "/><h:inputText value="#{loginView.newUser.password}"/><br/><br/>
+                <h:outputLabel value="Password: "/><h:inputText value="#{loginView.newUserPassword2}"/><br/><br/>
+                <h:commandButton action="#{loginView.register}" value="Login"/>
             </h:form>
         </div>
     </h:body>

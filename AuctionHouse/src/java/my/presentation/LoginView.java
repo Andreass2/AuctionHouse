@@ -21,9 +21,27 @@ public class LoginView {
 
     @EJB
     private AppUserFacade userFacade;
-    private static AppUser user;
+    private AppUser user;
     private String loginBarStatus; 
     private boolean loggedIn;
+    private AppUser newUser;
+    private String newUserPassword2;
+
+    public AppUser getNewUser() {
+        return newUser;
+    }
+
+    public void setNewUser(AppUser newUser) {
+        this.newUser = newUser;
+    }
+
+    public String getNewUserPassword2() {
+        return newUserPassword2;
+    }
+
+    public void setNewUserPassword2(String newUserPassword2) {
+        this.newUserPassword2 = newUserPassword2;
+    }
 
     public String getLoginBarStatus() {
         return loginBarStatus;
@@ -35,6 +53,7 @@ public class LoginView {
 
     public LoginView() {
         this.user = new AppUser();
+        this.newUser = new AppUser();
         loginBarStatus="log in";
         loggedIn = false;
     }
@@ -47,7 +66,7 @@ public class LoginView {
         this.loggedIn = loggedIn;
     }
     
-    public static AppUser getUser(){
+    public AppUser getUser(){
         return user;
     }
     
@@ -67,8 +86,17 @@ public class LoginView {
             return "login";
         }
     }
+    public String register(){
+        if(!newUser.getEmail().equals("") && !newUser.getPassword().equals("") && newUser.getPassword().equals(newUserPassword2)){
+            userFacade.create(newUser);
+            user = newUser; 
+            loggedIn = true;
+            return "index";
+        }
+        return "login";
+    }
     public String logout(){
-        user = null; 
+        user = new AppUser(); 
         loggedIn = false;
         return "login";
     }

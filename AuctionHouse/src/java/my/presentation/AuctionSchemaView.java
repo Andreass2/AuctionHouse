@@ -50,15 +50,16 @@ public class AuctionSchemaView {
     
      // Saves the auctions and then returns the string path "index"
     public String postAuction(){
-        AppUser user = LoginView.getUser();
-        if(user != null){
+        //AppUser user = LoginView.getUser();
+        //if(user != null){
             auction.setStatus(true);
             auction.setBid(0);    
-            auction.setAuctionOwner(user);
+            auction.setAuctionOwner(null);
             this.auctionFacade.create(auction);
+            auction = new Auction();
             return "index";
-        }
-        return "login";
+        //}
+        //return "login";
     }
     
     
