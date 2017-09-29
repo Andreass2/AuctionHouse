@@ -5,12 +5,19 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
       
       <h:form>
-          <h:commandButton action="#{homeView.goToHome}" value="Home"></h:commandButton>
-            <h:commandButton action="#{loginView.goToLogin}" value="login" rendered="#{!loginView.loggedIn}"></h:commandButton>
-            <h:commandButton action="#{loginView.logout}" value="log out" rendered="#{loginView.loggedIn}"></h:commandButton>
-            <h:commandButton action="#{auctionSchemaView.goToNewAuction}" value="Create Auction"></h:commandButton>
-            <h:commandButton action="#{yourAuctionsView.goToYourAuctions}" value="Your Auctions"></h:commandButton>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <h:commandLink class="navbar-brand" action="#{homeView.goToHome}" value="Auction House"></h:commandLink>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li><h:commandLink action="#{auctionSchemaView.goToNewAuction}" value="Create Auction"></h:commandLink></li>
+                        <li><h:commandLink action="#{yourAuctionsView.goToYourAuctions}" value="Your Auctions"></h:commandLink></li>
+                        <li><h:commandLink action="#{loginView.goToLogin}" value="Login" rendered="#{!loginView.loggedIn}"></h:commandLink></li>
+                        <li><h:commandLink action="#{loginView.logout}" value="Log out" rendered="#{loginView.loggedIn}"></h:commandLink></li>
+                    </ul>
+                </div>
+            </nav>
         </h:form>
-    <br></br>
 </html>
 
