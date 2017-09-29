@@ -26,6 +26,7 @@ public class LoginView {
     private boolean loggedIn;
     private AppUser newUser;
     private String newUserPassword2;
+    private boolean errorLogin;
 
     public AppUser getNewUser() {
         return newUser;
@@ -49,6 +50,14 @@ public class LoginView {
 
     public void setLoginBarStatus(String loginBarStatus) {
         this.loginBarStatus = loginBarStatus;
+    }
+
+    public boolean isErrorLogin() {
+        return errorLogin;
+    }
+
+    public void setErrorLogin(boolean errorLogin) {
+        this.errorLogin = errorLogin;
     }
 
     public LoginView() {
@@ -87,6 +96,7 @@ public class LoginView {
             return "index";
         }else{
             user = new AppUser();
+            errorLogin = true;
             return "login";
         }
     }

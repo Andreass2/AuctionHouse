@@ -15,6 +15,7 @@
         <div style="border:1px solid black; padding:10px; float: left; margin-left: 10px" >
             <h:form>
                 <h1>Login</h1>
+                <h:panelGroup rendered="#{loginView.errorLogin}" class="alert alert-danger" layout="block">Wrong username or password</h:panelGroup>
                 <h:outputLabel value="Username:"/><h:inputText class="form-control" value="#{loginView.user.email}"/><br/><br/>
                 <h:outputLabel value="Password: "/><h:inputSecret class="form-control" value="#{loginView.user.password}"/><br/><br/>
                 <h:commandButton class="btn btn" action="#{loginView.login}" value="Login"/>
