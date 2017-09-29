@@ -16,7 +16,7 @@
             <h:form>
                 <h1>Login</h1>
                 <h:outputLabel value="Username:"/><h:inputText class="form-control" value="#{loginView.user.email}"/><br/><br/>
-                <h:outputLabel value="Password: "/><h:inputText class="form-control" value="#{loginView.user.password}"/><br/><br/>
+                <h:outputLabel value="Password: "/><h:inputSecret class="form-control" value="#{loginView.user.password}"/><br/><br/>
                 <h:commandButton class="btn btn" action="#{loginView.login}" value="Login"/>
             </h:form>
         </div>
@@ -24,8 +24,8 @@
             <h1>Register</h1>
             <h:form>
                 <h:outputLabel value="Username:"/><h:inputText class="form-control" value="#{loginView.newUser.email}"/><br/><br/>
-                <h:outputLabel value="Password: "/><h:inputText class="form-control" value="#{loginView.newUser.password}"/><br/><br/>
-                <h:outputLabel value="Password: "/><h:inputText class="form-control" value="#{loginView.newUserPassword2}"/><br/><br/>
+                <h:outputLabel value="Password: "/><h:inputSecret class="form-control" value="#{loginView.newUser.password}"/><br/><br/>
+                <h:outputLabel value="Password: "/><h:inputSecret class="form-control" value="#{loginView.newUserPassword2}"/><br/><br/>
                 <h:commandButton class="btn btn" action="#{loginView.register}" value="Login"/>
             </h:form>
         </div>
