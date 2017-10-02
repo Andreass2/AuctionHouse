@@ -34,7 +34,7 @@ public class LoginView {
         this.user = new AppUser();
         this.newUser = new AppUser();
         singelton = SingeltonClass.getInstance();
-        isLoggedIn=false;
+        isLoggedIn= singelton.isLoggedIn();
     }
     
     
