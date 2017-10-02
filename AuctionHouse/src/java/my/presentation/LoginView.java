@@ -10,6 +10,7 @@ import entities.AppUser;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import singelton.SingeltonClass;
 
 /**
  *
@@ -22,12 +23,22 @@ public class LoginView {
     @EJB
     private AppUserFacade userFacade;
     private AppUser user;
-    private String loginBarStatus; 
-    private boolean loggedIn;
     private AppUser newUser;
     private String newUserPassword2;
     private boolean errorLogin;
+    SingeltonClass singelton;
+    private boolean isLoggedIn;
 
+   
+    public LoginView() {
+        this.user = new AppUser();
+        this.newUser = new AppUser();
+        singelton = SingeltonClass.getInstance();
+        isLoggedIn=false;
+    }
+    
+    
+    
     public AppUser getNewUser() {
         return newUser;
     }
@@ -44,14 +55,6 @@ public class LoginView {
         this.newUserPassword2 = newUserPassword2;
     }
 
-    public String getLoginBarStatus() {
-        return loginBarStatus;
-    }
-
-    public void setLoginBarStatus(String loginBarStatus) {
-        this.loginBarStatus = loginBarStatus;
-    }
-
     public boolean isErrorLogin() {
         return errorLogin;
     }
@@ -60,20 +63,6 @@ public class LoginView {
         this.errorLogin = errorLogin;
     }
 
-    public LoginView() {
-        this.user = new AppUser();
-        this.newUser = new AppUser();
-        loginBarStatus="log in";
-        loggedIn = false;
-    }
-
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
-    }
     
     public AppUser getUser(){
         return user;
@@ -91,8 +80,8 @@ public class LoginView {
         AppUser authorizedUser = userFacade.Login(user.getEmail(), user.getPassword());
         if(authorizedUser != null){
             user = authorizedUser;
-            loginBarStatus="log out";
-            loggedIn = true;
+            singelton.setLoggedIn(true);
+            isLoggedIn=true;
             return "index";
         }else{
             user = new AppUser();
@@ -104,16 +93,23 @@ public class LoginView {
         if(!newUser.getEmail().equals("") && !newUser.getPassword().equals("") && newUser.getPassword().equals(newUserPassword2)){
             userFacade.create(newUser);
             user = newUser; 
-            loggedIn = true;
+            singelton.setLoggedIn(true);
+            isLoggedIn=true;
             return "index";
         }
         return "login";
     }
     public String logout(){
         user = new AppUser(); 
-        loggedIn = false;
+        singelton.setLoggedIn(false); 
+        isLoggedIn=false;
         return "login";
     }
+    
+     public boolean isIsLoggedIn() {
+        return isLoggedIn;
+    }
+
     
     
 }

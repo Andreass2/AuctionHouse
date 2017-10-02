@@ -15,9 +15,9 @@
                         <li><h:commandLink action="#{yourAuctionsView.goToYourAuctions}" value="Your Auctions"></h:commandLink></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><h:commandLink action="#{loginView.goToLogin}" value="Login" rendered="#{!loginView.loggedIn}"></h:commandLink></li>
-                        <li><h:commandLink action="#{loginView.goToSignUp}" value="Sign up" rendered="#{!loginView.loggedIn}"></h:commandLink></li>
-                        <li><h:commandLink action="#{loginView.logout}" value="Log out" rendered="#{loginView.loggedIn}"></h:commandLink></li>
+                        <li><h:commandLink action="#{loginView.goToLogin}" value="Login" rendered="#{!loginView.isLoggedIn}"></h:commandLink></li>
+                        <li><h:commandLink action="#{loginView.goToSignUp}" value="Sign up" rendered="#{!loginView.isLoggedIn}"></h:commandLink></li>
+                        <li><h:commandLink action="#{loginView.logout}" value="Log out" rendered="#{loginView.isLoggedIn}"></h:commandLink></li>
                     </ul>
                 </div>
             </nav>

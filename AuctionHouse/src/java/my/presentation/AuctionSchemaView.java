@@ -7,11 +7,11 @@ package my.presentation;
 
 
 import entities.Auction;
-import entities.AppUser;
 import boundary.AuctionFacade;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import singelton.SingeltonClass;
 
 
 /**
@@ -24,19 +24,21 @@ public class AuctionSchemaView {
     @EJB
     AuctionFacade auctionFacade;
     Auction auction;
+    SingeltonClass singelton;
+
    
     /**
      * Creates a new instance of AuctionSchemaView
      */
     public AuctionSchemaView() {
         this.auction=new Auction();
+        singelton = SingeltonClass.getInstance();
     }
     
     //send user to auctionSchema.xhtml if user is authorized
     public String goToNewAuction(){
         //TODO check if user is logged in or not. true if logged in
-        boolean loggedIn=true;
-  
+        boolean loggedIn=singelton.isLoggedIn();
         String uri=(loggedIn)?"auctionSchema":"login";      
         return uri;
     }
