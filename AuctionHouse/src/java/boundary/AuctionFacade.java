@@ -36,7 +36,7 @@ public class AuctionFacade extends AbstractFacade<Auction> {
     returns all auctions by a specific user queryed by id
     */
     public List<Auction> findYourAuctions(long ownerId) {
-        Query query = em.createQuery("SELECT a FROM Auction a WHERE a.auctionOwner.id = ?1");
+        Query query = em.createQuery("SELECT a FROM Auction a WHERE CAST(a.auctionOwner.id AS VARCHAR(10)) LIKE CAST(?1 AS VARCHAR(10))");
         query.setParameter(1, ownerId);
         List<Auction> list= query.getResultList();
         return  list;

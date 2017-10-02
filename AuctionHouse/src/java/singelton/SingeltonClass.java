@@ -5,12 +5,15 @@
  */
 package singelton;
 
+import entities.AppUser;
+
 /**
  *
  * @author addi2
  */
 public class SingeltonClass {
     private boolean loggedIn;
+    private AppUser user;
 
   
     
@@ -19,6 +22,15 @@ public class SingeltonClass {
     */
     private SingeltonClass() {
         loggedIn=false;
+        user = new AppUser();
+    }
+
+    public AppUser getUser() {
+        return user;
+    }
+
+    public void setUser(AppUser user) {
+        this.user = user;
     }
     
     public static SingeltonClass getInstance() {

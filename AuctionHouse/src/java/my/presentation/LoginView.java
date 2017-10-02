@@ -81,6 +81,7 @@ public class LoginView {
         if(authorizedUser != null){
             user = authorizedUser;
             singelton.setLoggedIn(true);
+            singelton.setUser(user);
             isLoggedIn=true;
             return "index";
         }else{
@@ -94,6 +95,7 @@ public class LoginView {
             userFacade.create(newUser);
             user = newUser; 
             singelton.setLoggedIn(true);
+            singelton.setUser(user);
             isLoggedIn=true;
             return "index";
         }

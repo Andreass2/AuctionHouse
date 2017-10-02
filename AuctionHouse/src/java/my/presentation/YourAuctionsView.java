@@ -34,8 +34,7 @@ public class YourAuctionsView {
     
       // Returns all auctions
     public List<Auction> getYourAuctions(){
-        long ownerId=1;
-       return auctionFacade.findYourAuctions(ownerId);
+       return auctionFacade.findYourAuctions(singelton.getUser().getId());
     }
     
        //send user to auctionSchema.xhtml if user is authorized

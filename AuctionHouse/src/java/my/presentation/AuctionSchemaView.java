@@ -56,7 +56,7 @@ public class AuctionSchemaView {
         //if(user != null){
             auction.setStatus(true);
             auction.setBid(0);    
-            auction.setAuctionOwner(null);
+            auction.setAuctionOwner(singelton.getUser());
             this.auctionFacade.create(auction);
             auction = new Auction();
             return "index";
