@@ -18,10 +18,12 @@ import javax.enterprise.context.RequestScoped;
 @Named(value = "auctionView")
 @RequestScoped
 public class AuctionView {
-    String id;
+    private String id;
     @EJB
     AuctionFacade auctionFacade;
-    Auction auction;
+    private Auction auction;
+    private String bid;
+    
     
   
     /**
@@ -33,6 +35,21 @@ public class AuctionView {
     public String goToAuction(){
         auction = auctionFacade.find(Long.parseLong(id));
         return "auction";
+    }
+    
+    public String BidOnAuction(){
+        String url="";
+        Integer currentBid;
+        try{
+             currentBid=Integer.parseInt(bid);
+        }catch(NumberFormatException e){
+            return "";
+        }
+        if(currentBid != null && currentBid > auction.getBid() ){
+            auction.setBid(currentBid);
+            url= "index";
+        }
+        return url;
     }
     
    
@@ -48,4 +65,9 @@ public class AuctionView {
         return auction;
     }
 
+    public void setBid(String bid) {
+        this.bid = bid;
+    }
+
+    
 }
