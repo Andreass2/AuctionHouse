@@ -41,9 +41,12 @@
             </p:column>
             <p:column headerText="">
                 <h:commandButton class="btn-primary" action="#{auctionView.goToAuction()}" value="go to auction" >
-                    <var a="#{auction.id}"></var>
                     <f:setPropertyActionListener target="#{auctionView.id}" value="#{auction.id}" />
-                </h:commandButton>    
+                </h:commandButton>  
+                
+                <h:commandButton class="btn-primary" action="#{testConversationJsfBean.onClick()}" value="go to CONVERSATION-auction" >
+                    <f:setPropertyActionListener target="#{testConversationJsfBean.id}" value="#{auction.id}" />
+                </h:commandButton>  
             </p:column>
         </p:dataTable>
             <p:poll interval="1" update="tab"/>
