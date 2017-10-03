@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-            xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -11,18 +13,19 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-         <ui:include src="headerBar.xhtml"></ui:include>
+        <ui:include src="headerBar.xhtml"></ui:include>
 
-        <ui:repeat
-            value="#{yourAuctionsView.yourAuctions}" var="auction">
-            #{auction.auctionName}
-            #{auctionSchemaView.getTimeLeftMinutes(auction.id)} : #{auctionSchemaView.getTimeLeftSeconds(auction.id)}
-            <br/>
-        </ui:repeat>
-        
-         <h:dataTable value="#{yourAuctionsView.yourAuctions}" var="item">
-            #{item.auctionName}
-        </h:dataTable>
+        <h1> Your Auctions</h1>
+        <br />
+        <p:dataTable value="#{yourAuctionsView.yourAuctions}" var="auction" widgetVar="auctionsTable" style="width:60%"
+                     emptyMessage="You dont have any auctions">
+            <p:column headerText="Auction Name">
+                <h:outputText value="#{auction.auctionName}" />
+            </p:column>
+            <p:column headerText="Time left">
+                <h:outputText value="#{auctionSchemaView.getTimeLeftMinutes(auction.id)} : #{auctionSchemaView.getTimeLeftSeconds(auction.id)}" />
+            </p:column>
+        </p:dataTable>
     </h:body>
 </html>
 

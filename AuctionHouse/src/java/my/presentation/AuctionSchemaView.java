@@ -8,11 +8,16 @@ package my.presentation;
 
 import entities.Auction;
 import boundary.AuctionFacade;
+import static com.sun.faces.facelets.util.Path.context;
+import entities.AppUser;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.servlet.http.HttpServletResponse;
 import singelton.SingeltonClass;
+import java.lang.Exception;
+import javax.faces.context.FacesContext;
 
 
 /**
@@ -67,20 +72,26 @@ public class AuctionSchemaView {
     }
     
      // Saves the auctions and then returns the string path "index"
-    public String postAuction(){
-        //AppUser user = LoginView.getUser();
-        //if(user != null){
-            auction.setStatus(true);
-            auction.setBid(0);    
-            auction.setAuctionOwner(singelton.getUser());
-            auction.setTimeCreated(new Date());
-            this.auctionFacade.create(auction);
-            auction = new Auction();
-            return "index";
-        //}
-        //return "login";
-    }
-    
-    
-              
+    public void postAuction() throws Exception{
+        AppUser user = singelton.getUser();
+        try{
+            if(user != null){
+                auction.setStatus(true);
+                auction.setBid(0);    
+                auction.setAuctionOwner(user);
+                auction.setTimeCreated(new Date());
+                this.auctionFacade.create(auction);
+                auction = new Auction();
+                FacesContext context = FacesContext.getCurrentInstance();
+                HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+                response.sendRedirect("index.xhtml");
+            }else{
+                throw new Exception();
+            }
+        }catch(Exception e){
+                FacesContext context = FacesContext.getCurrentInstance();
+                HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+                response.sendRedirect("login.xhtml");
+        }
+    }         
 }
