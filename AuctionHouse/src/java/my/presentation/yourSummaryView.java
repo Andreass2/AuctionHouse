@@ -5,7 +5,6 @@
  */
 package my.presentation;
 
-import entities.Product;
 import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
