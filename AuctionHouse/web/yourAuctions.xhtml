@@ -17,7 +17,8 @@
 
         <h1> Your Auctions</h1>
         <br />
-        <p:dataTable value="#{yourAuctionsView.yourAuctions}" var="auction" widgetVar="auctionsTable" style="width:60%"
+        <h:form>
+        <p:dataTable id="tab" value="#{yourAuctionsView.yourAuctions}" var="auction" widgetVar="auctionsTable" style="width:60%"
                      emptyMessage="You dont have any auctions">
             <p:column headerText="Auction Name">
                 <h:outputText value="#{auction.auctionName}" />
@@ -26,6 +27,8 @@
                 <h:outputText value="#{auctionSchemaView.getTimeLeftMinutes(auction.id)} : #{auctionSchemaView.getTimeLeftSeconds(auction.id)}" />
             </p:column>
         </p:dataTable>
+            <p:poll interval="1" update="tab"/>
+        </h:form>
     </h:body>
 </html>
 

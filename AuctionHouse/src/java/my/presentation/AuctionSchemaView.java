@@ -69,7 +69,7 @@ public class AuctionSchemaView {
         Auction auction = auctionFacade.find(auctionId);
         long difference = -1;
         if(auction != null){
-            difference = 300000 - ((new Date()).getTime() - auction.getTimeCreated().getTime());
+            difference = 30000 - ((new Date()).getTime() - auction.getTimeCreated().getTime());
         }
         return difference;
     }
@@ -79,7 +79,13 @@ public class AuctionSchemaView {
     }
     
     public long getTimeLeftSeconds(Long auctionId){
-        return (getTimeLeftMillies(auctionId)/1000)%60;
+        long seconds = (getTimeLeftMillies(auctionId)/1000)%60;
+        if(seconds<0){
+            seconds = 0;
+            Auction auction = auctionFacade.find(auctionId);
+            auction.setFinished(true);
+        }
+        return seconds;
     }
     
      // Saves the auctions and then returns the string path "index"
