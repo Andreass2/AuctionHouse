@@ -19,7 +19,7 @@
         <h2> Auctions</h2>
         <br/>
         <h:form> 
-        <p:dataTable value="#{homeView.auctions}" var="auction" filteredValue="#{homeView.filteredAuctions}" widgetVar="auctionsTable" style="width:60%"
+        <p:dataTable id="tab" value="#{homeView.auctions}" var="auction" filteredValue="#{homeView.filteredAuctions}" widgetVar="auctionsTable" style="width:60%"
                      emptyMessage="No auctions found with given criteria">
             <p:column filterBy="#{auction.auctionName}" headerText="Auction Name" filterMatchMode="contains">
                 <h:outputText value="#{auction.auctionName}" />
@@ -46,6 +46,7 @@
                 </h:commandButton>    
             </p:column>
         </p:dataTable>
+            <p:poll interval="1" update="tab"/>
         </h:form>
                                                              
         

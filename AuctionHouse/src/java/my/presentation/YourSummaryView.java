@@ -7,10 +7,17 @@ package my.presentation;
 
 import boundary.AuctionFacade;
 import entities.Auction;
+import enumclasses.CategoryType;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 import singelton.SingeltonClass;
 
 /**
@@ -23,13 +30,58 @@ public class YourSummaryView {
  @EJB
     AuctionFacade auctionFacade;
     SingeltonClass singelton;
+    List<Auction> auctions;
+    private int newRating;
     /**
      * Creates a new instance of YourSummaryView
      */
     public YourSummaryView() {
       singelton= SingeltonClass.getInstance();
+      auctions = new ArrayList();
+      newRating = 1;
+      getYourPurchases();
     }
+
+    public List<Auction> getAuctions() {
+        return auctions;
+    }
+
+    public void setAuctions(List<Auction> auctions) {
+        this.auctions = auctions;
+    }
+
+    public int getNewRating() {
+        return newRating;
+    }
+
+    public void setNewRating(int newRating) {
+        this.newRating = newRating;
+    }
+    
+    
       // Returns all auctions
+    public List<Auction> getYourPurchases(){
+        try{
+            List<Auction> temp = auctionFacade.findYourPurchases(singelton.getUser().getId());
+            if(temp != null){
+                return temp;
+            }else{
+                throw new Exception();
+            }
+        }catch(Exception e){
+            return new ArrayList();
+        }
+    }
+    public void goToYourPurchases() throws IOException{
+        boolean loggedIn=singelton.isLoggedIn();
+        String uri=(loggedIn)?"yourSummary.xhtml":"login.xhtml";      
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+        response.sendRedirect(uri);
+    }
+    public void RateAuction(long id){
+        auctionFacade.RateAuction(id, newRating);
+    }
    
     
 }

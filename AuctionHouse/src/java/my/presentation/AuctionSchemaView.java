@@ -82,8 +82,7 @@ public class AuctionSchemaView {
         long seconds = (getTimeLeftMillies(auctionId)/1000)%60;
         if(seconds<0){
             seconds = 0;
-            Auction auction = auctionFacade.find(auctionId);
-            auction.setFinished(true);
+            auctionFacade.setFinished(auctionId);
         }
         return seconds;
     }

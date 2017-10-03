@@ -2,12 +2,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-            xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title>Purchase history</title>
     </h:head>
     <h:body>
-     
+        <ui:include src="headerBar.xhtml"></ui:include>
+        
+        <h1>Purchase history</h1>
+        <br/>
+        <br/>
+        <p:dataTable value="#{yourSummaryView.yourPurchases}" var="auction" widgetVar="auctionsTable" style="width:60%"
+                     emptyMessage="You dont have any purchases">
+            <p:column headerText="Auction Name">
+                <h:outputText value="#{auction.auctionName}" />
+            </p:column>
+             <p:column headerText="Rating">
+                 <h:outputText value="#{auction.rating}" rendered="#{auction.rating > 0}"/>
+                 <h:form rendered="#{auction.rating == 0.0}">
+                        <h:selectOneRadio value = "#{yourSummaryView.newRating}"> 
+                            <f:selectItem itemValue = "1" itemLabel = "1" /> 
+                            <f:selectItem itemValue = "2" itemLabel = "2" />
+                            <f:selectItem itemValue = "3" itemLabel = "3" /> 
+                            <f:selectItem itemValue = "4" itemLabel = "4" />
+                            <f:selectItem itemValue = "5" itemLabel = "5" /> 
+                            <f:selectItem itemValue = "6" itemLabel = "6" />
+                        </h:selectOneRadio>    
+                        <h:commandButton value="Set rating" action="#{yourSummaryView.RateAuction(auction.id)}" />
+                    </h:form>
+            </p:column>
+        </p:dataTable>
+        
+        
     </h:body>
 </html>
 
