@@ -27,7 +27,13 @@
             <p:column headerText="Current bid">
                 <h:outputText value="#{auction.bid}" />
             </p:column>
-            <p:column headerText="Current bid">
+            <p:column filterBy="#{auction.category}" headerText="Category" filterMatchMode="exact">
+                <f:facet name="filter">
+                    <h:selectOneMenu onchange="PF('auctionsTable').filter()" >
+                        <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItems value="#{homeView.categories}" />
+                    </h:selectOneMenu>
+                </f:facet>
                 <h:outputText value="#{auction.category}" />
             </p:column>
             <p:column headerText="Time left">

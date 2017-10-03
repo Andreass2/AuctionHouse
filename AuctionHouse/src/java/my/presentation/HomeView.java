@@ -7,9 +7,10 @@ package my.presentation;
 
 import boundary.AuctionFacade;
 import entities.Auction;
+import enumclasses.CategoryType;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -26,24 +27,20 @@ public class HomeView {
     AuctionFacade auctionFacade;
     List<Auction> auctions;
     List<Auction> filteredAuctions;
-    String searchText;
-
+    List<CategoryType> categories;
     /**
      * Creates a new instance of HomeView
      */
     public HomeView() {
+        this.categories = Arrays.asList(CategoryType.values());
     }
     @PostConstruct
     public void init(){
         getAllAuctions();
-        searchText="";
+        this.categories = Arrays.asList(CategoryType.values());
     }
     public List<Auction> getAuctions() {
         return auctions;
-    }
-    public void search(){
-        getAllAuctions();
-        filteredAuctions =  auctions.stream().filter((a) -> (a.getAuctionName().toUpperCase().contains(searchText.toUpperCase()))).collect(Collectors.toList());
     }
 
     public List<Auction> getFilteredAuctions() {
@@ -57,19 +54,18 @@ public class HomeView {
     public void setAuctions(List<Auction> auctions) {
         this.auctions = auctions;
     }
-
-    public String getSearchText() {
-        return searchText;
-    }
-
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
-    }
-    
     
      // Returns the total number of auctions
     public int getNumberOfAuctions(){
        return auctionFacade.findAll().size();
+    }
+
+    public List<CategoryType> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<CategoryType> categories) {
+        this.categories = categories;
     }
     
       // Returns all auctions
