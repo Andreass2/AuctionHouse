@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,25 @@ public class AppUser implements Serializable {
     
     private String email;
     private String password;
+    private List<Double> feedbacks; 
+    private List<Auction> purchaseList; 
+    private List<Auction> yourAuctions; 
+
+    public List<Auction> getPurchaseList() {
+        return purchaseList;
+    }
+
+    public void setPurchaseList(List<Auction> purchaseList) {
+        this.purchaseList = purchaseList;
+    }
+
+    public List<Double> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(List<Double> feedbacks) {
+        this.feedbacks = feedbacks;
+    }
 
     public Long getId() {
         return id;

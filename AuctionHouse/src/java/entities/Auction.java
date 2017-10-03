@@ -29,6 +29,7 @@ public class Auction implements Serializable {
     private AppUser bidOwner;
     private boolean status;
     private Date timeCreated;
+    private double rating; 
 
     public AppUser getBidOwner() {
         return bidOwner;
