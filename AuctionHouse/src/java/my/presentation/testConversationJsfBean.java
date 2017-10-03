@@ -59,15 +59,16 @@ public String onKeepGoing()throws IOException{
     Integer currentBid=null;
     FacesContext context = FacesContext.getCurrentInstance();
     HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-    
+    //TODO checkif timeout on auction
+    //TODO lock for single user only. or is this impl when trying to update same object in db
     if(bid.equals("") || conversation == null) {
-        return "auction?ERROR";
+        return "";
     }
     else{
      try{
             currentBid=Integer.parseInt(bid);
         }catch(Exception e){
-            return"auction?errorNEEDStoBEnumber";
+            return"";
         }
         if(currentBid != null && currentBid > auction.getBid() ){
             auction.setBid(currentBid);
@@ -76,7 +77,7 @@ public String onKeepGoing()throws IOException{
             end();
             response.sendRedirect("index.xhtml?Success");
         }else if (currentBid != null || currentBid < auction.getBid() ){
-            return "auction?BIDtoLOW";
+            return "";
         }
     }
     return "";
