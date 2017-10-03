@@ -20,13 +20,18 @@
         
         <ui:repeat xmlns:ui="http://java.sun.com/jsf/facelets"
                    value="#{homeView.allAuctions}" var="auction">
-            #{auction.auctionName}
+            <h:form>
+                <div class="form-group">
+                    <h:outputLabel value="#{auction.auctionName}"></h:outputLabel>
+                </div>  
+                <div class="form-group">
+                    <h:commandLink class="btn-primary" action="#{auctionView.goToAuction()}" value="go to auction"></h:commandLink>           
+                </div>      
+            </h:form>
             <br/>
         </ui:repeat>
         
-        <h:dataTable value="#{homeView.allAuctions}" var="item">
-            #{item.auctionName}
-        </h:dataTable>                                                      
+                                                             
         
     </h:body>
 </html>
