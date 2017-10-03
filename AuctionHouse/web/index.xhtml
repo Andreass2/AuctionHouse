@@ -27,6 +27,9 @@
             <p:column headerText="Current bid">
                 <h:outputText value="#{auction.bid}" />
             </p:column>
+            <p:column headerText="Current bid">
+                <h:outputText value="#{auction.category}" />
+            </p:column>
             <p:column headerText="Time left">
                 <h:outputText value="#{auctionSchemaView.getTimeLeftMinutes(auction.id)} : #{auctionSchemaView.getTimeLeftSeconds(auction.id)}" />
             </p:column>
