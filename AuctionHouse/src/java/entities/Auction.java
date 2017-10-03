@@ -5,6 +5,7 @@
  */
 package entities;
 
+import enumclasses.CategoryType;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -29,7 +30,34 @@ public class Auction implements Serializable {
     private AppUser bidOwner;
     private boolean status;
     private Date timeCreated;
-    private double rating; 
+    private double rating;
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public CategoryType getCategoryType() {
+        return categoryType;
+    }
+
+    public void setCategoryType(CategoryType categoryType) {
+        this.categoryType = categoryType;
+    }
+    private CategoryType categoryType;
+
 
     public AppUser getBidOwner() {
         return bidOwner;

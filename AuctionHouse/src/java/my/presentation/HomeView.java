@@ -75,7 +75,7 @@ public class HomeView {
       // Returns all auctions
     public void getAllAuctions(){
         try{
-            auctions =  auctionFacade.findAllAuctions();
+            auctions =  auctionFacade.findAll();
         }catch(Exception e){
             auctions = new ArrayList();
         }

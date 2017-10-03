@@ -47,8 +47,5 @@ public class AuctionFacade extends AbstractFacade<Auction> {
   /*
   returns all auctions. SELECT * FROM auction did not work.
   */
-  public List<Auction> findAllAuctions() {
-    return (List<Auction>)em.createQuery("SELECT a FROM Auction a").getResultList();
-    }
   
 }

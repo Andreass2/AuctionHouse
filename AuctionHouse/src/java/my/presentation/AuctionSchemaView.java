@@ -10,6 +10,7 @@ import entities.Auction;
 import boundary.AuctionFacade;
 import static com.sun.faces.facelets.util.Path.context;
 import entities.AppUser;
+import enumclasses.CategoryType;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -17,6 +18,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.servlet.http.HttpServletResponse;
 import singelton.SingeltonClass;
 import java.lang.Exception;
+import java.util.Arrays;
+import java.util.List;
 import javax.faces.context.FacesContext;
 
 
@@ -31,6 +34,8 @@ public class AuctionSchemaView {
     AuctionFacade auctionFacade;
     Auction auction;
     SingeltonClass singelton;
+    List<CategoryType> categorys; 
+
 
    
     /**
@@ -39,6 +44,12 @@ public class AuctionSchemaView {
     public AuctionSchemaView() {
         this.auction=new Auction();
         singelton = SingeltonClass.getInstance();
+        this.categorys = Arrays.asList(CategoryType.values());        
+
+    }
+
+    public List<CategoryType> getCategorys() {
+        return categorys;
     }
     
     //send user to auctionSchema.xhtml if user is authorized
