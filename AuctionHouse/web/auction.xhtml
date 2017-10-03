@@ -11,18 +11,25 @@
     <h:body>
         <h:form>
             <div class="form-group">
-                <h:outputLabel>BID=200</h:outputLabel>
+                <h:outputLabel value="Auction name"></h:outputLabel>
+                <h:outputLabel value="#{auctionView.auction.auctionName}"></h:outputLabel>
             </div>
             <div class="form-group">
-                <h:outputLabel value=""></h:outputLabel>
+                <h:outputLabel value="Bid: "></h:outputLabel>
+                <h:outputLabel value="#{auctionView.auction.bid}"></h:outputLabel>            </div>
             </div>
             <div class="form-group">
                 <h:inputText id="newBid"  value="Enter bid">new bid</h:inputText>
                 <h:commandLink type="submit" class="btn btn-primary">bid</h:commandLink>
             </div>
+              <div class="form-group">
+                <h:outputLabel value="Auction owner"></h:outputLabel>
+                <h:outputLabel value="#{auctionView.auction.auctionOwner.email}"></h:outputLabel>
+            </div>
              <div class="form-group">
-                 <h:outputLabel value="#{auctionView.id}">id</h:outputLabel>
-             </div>
+                <h:outputLabel value="Description"></h:outputLabel>
+                <h:outputLabel value="#{auctionView.auction.description}"></h:outputLabel>
+            </div>
          </h:form>
     </h:body>
 </html>

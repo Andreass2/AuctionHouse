@@ -27,8 +27,19 @@
                     </select>
                 </span>
             </div>
-            <h:commandButton class="btn btn" action="#{auctionSchemaView.postAuction()}" value="Post Auction"/>
+            <div class="form-group">
+                <h:outputLabel value="Starting bid"/>
+                <h:inputText class="form-control" style="width:20%" value="#{auctionSchemaView.auction.bid}" converterMessage="Please add numeric values"></h:inputText>
 
+            </div>
+            <div class="form-group">
+                <h:outputLabel value="Description "/>
+                <h:inputText class="form-control" style="width:20%" value="#{auctionSchemaView.auction.description}"></h:inputText>
+
+            </div>
+             <div class="form-group">
+                <h:commandButton class="btn btn" action="#{auctionSchemaView.postAuction()}" value="Post Auction"/>
+            </div>
         </h:form>
 
 

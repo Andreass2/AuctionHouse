@@ -88,7 +88,6 @@ public class AuctionSchemaView {
         try{
             if(user != null){
                 auction.setStatus(true);
-                auction.setBid(0);    
                 auction.setAuctionOwner(user);
                 auction.setTimeCreated(new Date());
                 this.auctionFacade.create(auction);

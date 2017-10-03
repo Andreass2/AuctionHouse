@@ -30,6 +30,7 @@ public class Auction implements Serializable {
     private AppUser bidOwner;
     private boolean status;
     private Date timeCreated;
+    private String description;
     private double rating;
     private String category;
 
@@ -114,6 +115,15 @@ public class Auction implements Serializable {
         this.id = id;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;
