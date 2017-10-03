@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class Auction implements Serializable {
     private Integer bid;
     private AppUser bidOwner;
     private boolean status;
+    private Date timeCreated;
 
     public AppUser getBidOwner() {
         return bidOwner;
@@ -67,6 +69,13 @@ public class Auction implements Serializable {
         this.auctionOwner = auctionOwner;
     }
 
+    public Date getTimeCreated() {
+        return timeCreated;
+    }
+
+    public void setTimeCreated(Date timeCreated) {
+        this.timeCreated = timeCreated;
+    }
 
     public Long getId() {
         return id;

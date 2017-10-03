@@ -8,6 +8,7 @@ package my.presentation;
 
 import entities.Auction;
 import boundary.AuctionFacade;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -48,7 +49,22 @@ public class AuctionSchemaView {
         return auction;
     }
     
+    public long getTimeLeftMillies(Long auctionId){
+        Auction auction = auctionFacade.find(auctionId);
+        long difference = -1;
+        if(auction != null){
+            difference = 300000 - ((new Date()).getTime() - auction.getTimeCreated().getTime());
+        }
+        return difference;
+    }
     
+    public long getTimeLeftMinutes(Long auctionId){
+        return (getTimeLeftMillies(auctionId)/60000)%60;
+    }
+    
+    public long getTimeLeftSeconds(Long auctionId){
+        return (getTimeLeftMillies(auctionId)/1000)%60;
+    }
     
      // Saves the auctions and then returns the string path "index"
     public String postAuction(){
@@ -57,6 +73,7 @@ public class AuctionSchemaView {
             auction.setStatus(true);
             auction.setBid(0);    
             auction.setAuctionOwner(singelton.getUser());
+            auction.setTimeCreated(new Date());
             this.auctionFacade.create(auction);
             auction = new Auction();
             return "index";

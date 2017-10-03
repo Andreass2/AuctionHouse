@@ -16,6 +16,7 @@
         <ui:repeat
             value="#{yourAuctionsView.yourAuctions}" var="auction">
             #{auction.auctionName}
+            #{auctionSchemaView.getTimeLeftMinutes(auction.id)} : #{auctionSchemaView.getTimeLeftSeconds(auction.id)}
             <br/>
         </ui:repeat>
         
