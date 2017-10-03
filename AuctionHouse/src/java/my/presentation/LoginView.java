@@ -7,9 +7,12 @@ package my.presentation;
 
 import boundary.AppUserFacade;
 import entities.AppUser;
+import java.io.IOException;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 import singelton.SingeltonClass;
 
 /**
@@ -68,44 +71,58 @@ public class LoginView {
         return user;
     }
     
-    public String goToLogin(){
-        return "login";
+    public void goToLogin() throws IOException{
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+        response.sendRedirect("login.xhtml");
     }
     
-    public String goToSignUp(){
-        return "signup";
+    public void goToSignUp() throws IOException{
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+        response.sendRedirect("signup.xhtml");
     }
     
-    public String login(){
+    public void login() throws IOException{
         AppUser authorizedUser = userFacade.Login(user.getEmail(), user.getPassword());
         if(authorizedUser != null){
             user = authorizedUser;
             singelton.setLoggedIn(true);
             singelton.setUser(user);
             isLoggedIn=true;
-            return "index";
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+            response.sendRedirect("index.xhtml");
         }else{
             user = new AppUser();
             errorLogin = true;
-            return "login";
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+            response.sendRedirect("login.xhtml");
         }
     }
-    public String register(){
+    public void register() throws IOException{
         if(!newUser.getEmail().equals("") && !newUser.getPassword().equals("") && newUser.getPassword().equals(newUserPassword2)){
             userFacade.create(newUser);
             user = newUser; 
             singelton.setLoggedIn(true);
             singelton.setUser(user);
             isLoggedIn=true;
-            return "index";
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+            response.sendRedirect("index.xhtml");
         }
-        return "login";
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+        response.sendRedirect("signup.xhtml");
     }
-    public String logout(){
+    public void logout() throws IOException {
         user = new AppUser(); 
         singelton.setLoggedIn(false); 
         isLoggedIn=false;
-        return "login";
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
+        response.sendRedirect("login.xhtml");
     }
     
      public boolean isIsLoggedIn() {
