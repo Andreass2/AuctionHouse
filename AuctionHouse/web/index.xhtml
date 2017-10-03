@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -16,26 +17,21 @@
         <h:outputText value="#{homeView.numberOfAuctions}"/>
         <br />
         <h2> Auctions</h2>
-        <input class="form-control" style="width:20%" placeholder="Search Auctions" />
         <br/>
-        
-        <ui:repeat xmlns:ui="http://java.sun.com/jsf/facelets"
-                   value="#{homeView.allAuctions}" var="auction">
-            <h:form>
-                <div class="form-group">
-                    <h:outputLabel value="#{auction.auctionName}"></h:outputLabel>
-                </div>  
-                <div class="form-group">
-                    <h:commandButton class="btn-primary" action="#{auctionView.goToAuction()}" value="go to auction" >
-                        <var a="#{auction.id}"></var>
-                        <f:setPropertyActionListener target="#{auctionView.id}" value="#{auction.id}" />
-                    </h:commandButton>
-                </div>  
-                
-            </h:form>
-            <br/>
-        </ui:repeat>
-        
+        <h:form> 
+        <p:dataTable value="#{homeView.auctions}" var="auction" filteredValue="#{homeView.filteredAuctions}" widgetVar="auctionsTable" style="width:60%"
+                     emptyMessage="No auctions found with given criteria">
+            <p:column filterBy="#{auction.auctionName}" headerText="Auction Name" filterMatchMode="contains">
+                <h:outputText value="#{auction.auctionName}" />
+            </p:column>
+            <p:column headerText="">
+                <h:commandButton class="btn-primary" action="#{auctionView.goToAuction()}" value="go to auction" >
+                    <var a="#{auction.id}"></var>
+                    <f:setPropertyActionListener target="#{auctionView.id}" value="#{auction.id}" />
+                </h:commandButton>    
+            </p:column>
+        </p:dataTable>
+        </h:form>
                                                              
         
     </h:body>
