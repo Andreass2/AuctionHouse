@@ -3,28 +3,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>Facelet Title</title>
+        <title>Create Auction</title>
     </h:head>
     <h:body>
         <ui:include src="headerBar.xhtml"></ui:include>
+        <h1>Create Auction</h1>
+        <br />
+        <br />
         <h:form>
             <h:outputLabel value="Auction name"/>
 
             <div class="input-group">
                 <h:inputText class="form-control" style="width:40%" value="#{auctionSchemaView.auction.auctionName}"/> 
                 <span class="input-group-select" style="float:left; margin-left: 10px">
-                    <select>
-                        <ui:repeat
-                            value="#{auctionSchemaView.categorys}" var="categorys">
-                            <option value="#{auctionSchemaView.auction.category}">#{categorys}</option>
-                        </ui:repeat>
-                    </select>
+                    <h:selectOneMenu value="#{auctionSchemaView.auction.category}">
+                        <f:selectItems value="#{auctionSchemaView.categorys}"/>
+                    </h:selectOneMenu>
                 </span>
             </div>
             <div class="form-group">
