@@ -33,6 +33,15 @@ public class Auction implements Serializable {
     private String description;
     private double rating;
     private String category;
+    private boolean finished;
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
 
     public String getCategory() {
         return category;

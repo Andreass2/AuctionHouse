@@ -92,6 +92,7 @@ public class AuctionSchemaView {
                 auction.setTimeCreated(new Date());
                 this.auctionFacade.create(auction);
                 auction = new Auction();
+                auction.setFinished(false);
                 FacesContext context = FacesContext.getCurrentInstance();
                 HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
                 response.sendRedirect("index.xhtml");
