@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -25,8 +26,12 @@
                     <h:outputLabel value="#{auction.auctionName}"></h:outputLabel>
                 </div>  
                 <div class="form-group">
-                    <h:commandLink class="btn-primary" action="#{auctionView.goToAuction()}" value="go to auction"></h:commandLink>           
-                </div>      
+                    <h:commandButton class="btn-primary" action="#{auctionView.goToAuction()}" value="go to auction" >
+                        <var a="#{auction.id}"></var>
+                        <f:setPropertyActionListener target="#{auctionView.id}" value="#{auction.id}" />
+                    </h:commandButton>
+                </div>  
+                
             </h:form>
             <br/>
         </ui:repeat>

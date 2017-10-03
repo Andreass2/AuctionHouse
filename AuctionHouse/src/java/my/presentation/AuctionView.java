@@ -15,7 +15,9 @@ import javax.enterprise.context.RequestScoped;
 @Named(value = "auctionView")
 @RequestScoped
 public class AuctionView {
+    String id;
 
+  
     /**
      * Creates a new instance of AuctionView
      */
@@ -26,4 +28,13 @@ public class AuctionView {
         return "auction";
     }
     
+   
+      public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }
