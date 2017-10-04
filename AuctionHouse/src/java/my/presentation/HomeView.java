@@ -57,7 +57,7 @@ public class HomeView {
     
      // Returns the total number of auctions
     public int getNumberOfAuctions(){
-       return auctionFacade.findAll().size();
+       return auctionFacade.findAllAuctions().size();
     }
 
     public List<CategoryType> getCategories() {
@@ -71,7 +71,7 @@ public class HomeView {
       // Returns all auctions
     public void getAllAuctions(){
         try{
-            auctions =  auctionFacade.findAll();
+            auctions =  auctionFacade.findAllAuctions();
         }catch(Exception e){
             auctions = new ArrayList();
         }
