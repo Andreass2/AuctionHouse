@@ -71,7 +71,7 @@ public String onCheck()throws IOException{
       mutex.acquire();
       try {
           
-    if(bid.equals("") || conversation == null || singelton.isLoggedIn()) {
+    if((bid.equals("") || conversation == null)&& !singelton.isLoggedIn() ) {
         return "";
     }
     else{
