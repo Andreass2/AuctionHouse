@@ -68,7 +68,7 @@ public class AuctionSchemaView {
     public long getTimeLeftMillies(Long auctionId){
         Auction auction = auctionFacade.find(auctionId);
         long difference = -1;
-        if(auction != null){
+        if(auction != null && auction.getTimeCreated()!= null){
             difference = 30000 - ((new Date()).getTime() - auction.getTimeCreated().getTime());
         }
         return difference;
@@ -94,7 +94,6 @@ public class AuctionSchemaView {
             if(user != null){
                 auction.setStatus(false);
                 auction.setAuctionOwner(user);
-                auction.setTimeCreated(new Date());
                 auction.setFinished(false);
                 this.auctionFacade.create(auction);
                 auction = new Auction();

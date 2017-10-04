@@ -14,26 +14,26 @@
         <h:form>
             <div class="form-group">
                 <h:outputLabel value="Auction name"></h:outputLabel>
-                <h:outputLabel value="#{testConversationJsfBean.auction.auctionName}"></h:outputLabel>
+                <h:outputLabel value="#{auctionView.auction.auctionName}"></h:outputLabel>
             </div>
             <div class="form-group">
                 <h:outputLabel value="Bid: "></h:outputLabel>
-                <h:outputLabel value="#{testConversationJsfBean.auction.bid}"></h:outputLabel>
+                <h:outputLabel value="#{auctionView.auction.bid}"></h:outputLabel>
             </div>
             <div class="form-group">
-                <h:inputText  value="#{testConversationJsfBean.bid}" >new bid</h:inputText>
-                <h:commandButton class="btn-primary" action="#{testConversationJsfBean.onKeepGoing()}" value="Bid" >
-                    <f:setPropertyActionListener target="#{testConversationJsfBean.id}" value="#{testConversationJsfBean.id}" />
+                <h:inputText  value="#{auctionView.bid}" >new bid</h:inputText>
+                <h:commandButton class="btn-primary" action="#{auctionView.onCheck()}" value="Bid" >
+                    <f:setPropertyActionListener target="#{auctionView.id}" value="#{auctionView.id}" />
                 </h:commandButton>   
-                #{testConversationJsfBean.auction.id}
+                #{auctionView.auction.id}
             </div>
               <div class="form-group">
                 <h:outputLabel value="Auction owner"></h:outputLabel>
-                <h:outputLabel value="#{testConversationJsfBean.auction.auctionOwner.email}"></h:outputLabel>
+                <h:outputLabel value="#{auctionView.auction.auctionOwner.email}"></h:outputLabel>
             </div>
              <div class="form-group">
                 <h:outputLabel value="Description"></h:outputLabel>
-                <h:outputLabel value="#{testConversationJsfBean.auction.description}"></h:outputLabel>
+                <h:outputLabel value="#{auctionView.auction.description}"></h:outputLabel>
             </div>
          </h:form>
     </h:body>

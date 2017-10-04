@@ -7,6 +7,7 @@ package my.presentation;
 
 import boundary.AuctionFacade;
 import entities.Auction;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -47,6 +48,7 @@ public class YourAuctionsView {
     }
     public void startAuction(Auction auction ){
         auction.setStatus(true);
+        auction.setTimeCreated(new Date());
         auctionFacade.edit(auction);
     }
     
