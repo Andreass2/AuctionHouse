@@ -45,6 +45,10 @@ public class YourAuctionsView {
         String uri=(loggedIn)?"yourAuctions":"login";      
         return uri;
     }
+    public void startAuction(Auction auction ){
+        auction.setStatus(true);
+        auctionFacade.edit(auction);
+    }
     
     
 }

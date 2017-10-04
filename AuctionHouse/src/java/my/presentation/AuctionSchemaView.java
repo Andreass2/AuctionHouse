@@ -92,12 +92,12 @@ public class AuctionSchemaView {
         AppUser user = singelton.getUser();
         try{
             if(user != null){
-                auction.setStatus(true);
+                auction.setStatus(false);
                 auction.setAuctionOwner(user);
                 auction.setTimeCreated(new Date());
+                auction.setFinished(false);
                 this.auctionFacade.create(auction);
                 auction = new Auction();
-                auction.setFinished(false);
                 FacesContext context = FacesContext.getCurrentInstance();
                 HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
                 response.sendRedirect("index.xhtml");

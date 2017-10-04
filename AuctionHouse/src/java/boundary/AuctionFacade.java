@@ -48,7 +48,7 @@ public class AuctionFacade extends AbstractFacade<Auction> {
     }
         public List<Auction> findYourPurchases(long ownerId) {
             //change to bidOwner
-        Query query = em.createQuery("SELECT a FROM Auction a WHERE CAST(a.auctionOwner.id AS VARCHAR(10)) LIKE CAST(?1 AS VARCHAR(10)) AND a.finished = true");
+        Query query = em.createQuery("SELECT a FROM Auction a WHERE CAST(a.bidOwner.id AS VARCHAR(10)) LIKE CAST(?1 AS VARCHAR(10)) AND a.finished = true");
         query.setParameter(1, ownerId);
         List<Auction> list= query.getResultList();
         return  list;
