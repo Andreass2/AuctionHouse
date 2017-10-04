@@ -5,7 +5,9 @@
  */
 package my.presentation;
 
+import boundary.AppUserFacade;
 import boundary.AuctionFacade;
+import entities.AppUser;
 import entities.Auction;
 import enumclasses.CategoryType;
 import java.io.IOException;
@@ -29,6 +31,7 @@ import singelton.SingeltonClass;
 public class YourSummaryView {
  @EJB
     AuctionFacade auctionFacade;
+    AppUserFacade appUserFacade;
     SingeltonClass singelton;
     List<Auction> auctions;
     private int newRating;
@@ -79,8 +82,14 @@ public class YourSummaryView {
         HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
         response.sendRedirect(uri);
     }
-    public void RateAuction(long id){
-        auctionFacade.RateAuction(id, newRating);
+    public void RateAuction(Auction auction){
+        auction.setBid(newRating);
+        auctionFacade.edit(auction);
+        AppUser user = auction.getAuctionOwner();
+        List<Double> ratings = user.getFeedbacks();
+        ratings.add(new Double(newRating));
+        user.setFeedbacks(ratings);
+        appUserFacade.edit(user);
     }
    
     

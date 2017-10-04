@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>Facelet Title</title>
+        <title>Your auctions</title>
     </h:head>
     <h:body>
         <ui:include src="headerBar.xhtml"></ui:include>
@@ -27,7 +27,7 @@
                 <h:outputText value="#{auctionSchemaView.getTimeLeftMinutes(auction.id)} : #{auctionSchemaView.getTimeLeftSeconds(auction.id)}" />
             </p:column>
             <p:column  rendered="#{auction.status == false}">
-                <h:commandButton value="Start auction" action="#{yourAuctionView.startAuction(auction)}"  />
+                <h:commandButton value="Start auction" action="#{yourAuctionsView.startAuction(auction)}"  />
             </p:column>
         </p:dataTable>
             <p:poll interval="1" update="tab"/>
