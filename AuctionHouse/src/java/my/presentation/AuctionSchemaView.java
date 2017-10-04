@@ -99,7 +99,7 @@ public class AuctionSchemaView {
                 auction = new Auction();
                 FacesContext context = FacesContext.getCurrentInstance();
                 HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-                response.sendRedirect("index.xhtml");
+                response.sendRedirect("yourAuctions.xhtml");
             }else{
                 throw new Exception();
             }
