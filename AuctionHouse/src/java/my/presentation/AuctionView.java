@@ -6,6 +6,7 @@
 package my.presentation;
 
 import boundary.AuctionFacade;
+import com.sun.corba.se.impl.orbutil.concurrent.Mutex;
 import entities.Auction;
 import java.io.IOException;
 import javax.inject.Named;
@@ -65,7 +66,12 @@ public String onCheck()throws IOException{
     HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
     //TODO checkif timeout on auction
     //TODO lock for single user only. or is this impl when trying to update same object in db
-    if(bid.equals("") || conversation == null) {
+    Mutex mutex= new Mutex();
+        try {
+      mutex.acquire();
+      try {
+          
+    if(bid.equals("") || conversation == null || singelton.isLoggedIn()) {
         return "";
     }
     else{
@@ -74,16 +80,23 @@ public String onCheck()throws IOException{
         }catch(Exception e){
             return"";
         }
-        if(currentBid != null && currentBid > auction.getBid() ){
+        if( currentBid > auction.getBid() ){
             auction.setBid(currentBid);
             auction.setBidOwner(singelton.getUser());
             this.auctionFacade.edit(auction);
             end();
             response.sendRedirect("index.xhtml?Success");
-        }else if (currentBid != null || currentBid < auction.getBid() ){
+        }else if (currentBid < auction.getBid() ){
             return "";
         }
     }
+      } finally {
+        mutex.release();
+      }
+    } catch(InterruptedException ie) {
+      // ...
+    }
+   
     return "";
 }
 
