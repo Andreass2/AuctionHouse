@@ -67,9 +67,9 @@ public class AuctionSchemaView {
     
     public long getTimeLeftMillies(Long auctionId){
         Auction auction = auctionFacade.find(auctionId);
-        long difference = -1;
+        long difference = 0;
         if(auction != null && auction.getTimeCreated()!= null){
-            difference = 30000 - ((new Date()).getTime() - auction.getTimeCreated().getTime());
+            difference = 300000 - ((new Date()).getTime() - auction.getTimeCreated().getTime());
         }
         return difference;
     }
