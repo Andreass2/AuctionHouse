@@ -15,6 +15,9 @@ import javax.persistence.Query;
 /**
  *
  * @author fredrik
+ * dynamic(translated at runtime) queris made with JPQL (java presitence query language)
+ * dynamic queries is translated every time, vs static witch is only compiled onced and can be used by many different methods (effektiv med mange kall)
+ * dynamic/static/native are all prone to runtime errors (som vi har sett flere ganger under testingen), criteria based queries fikser dette.
  */
 @Stateless
 public class AppUserFacade extends AbstractFacade<AppUser> {

@@ -16,6 +16,9 @@ import javax.persistence.Query;
 /**
  *
  * @author fredrik
+ * dynamic(translated at runtime) queris made with JPQL (java presitence query language)
+ * dynamic queries is translated every time, vs static witch is only compiled onced and can be used by many different methods
+ * dynamic/static/native are all prone to runtime errors (som vi har sett flere ganger under testingen), criteria based queries fikser dette
  */
 @Stateless
 public class AuctionFacade extends AbstractFacade<Auction> {
@@ -40,6 +43,7 @@ public class AuctionFacade extends AbstractFacade<Auction> {
         List<Auction> list= query.getResultList();
         return  list;
     }
+    //dynamic queris 
     public List<Auction> findYourAuctions(long ownerId) {
         Query query = em.createQuery("SELECT a FROM Auction a WHERE CAST(a.auctionOwner.id AS VARCHAR(10)) LIKE CAST(?1 AS VARCHAR(10)) AND a.finished = false");
         query.setParameter(1, ownerId);
