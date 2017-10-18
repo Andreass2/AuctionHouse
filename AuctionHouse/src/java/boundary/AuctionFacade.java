@@ -5,11 +5,14 @@
  */
 package boundary;
 
+import entities.AppUser;
 import entities.Auction;
+import entities.Bid;
 
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -62,11 +65,33 @@ public class AuctionFacade extends AbstractFacade<Auction> {
         query.setParameter(1, auctionId);
         query.executeUpdate();
     }
-    
- 
+    public void createAuction(Auction auction, int bid, AppUser user) {
+        this.create(auction);
+        Bid b = new Bid();
+        b.setAuction(auction);
+        b.setBid(bid);
+        b.setUser(user);
+        em.persist(b);
+    }
 
-  /*
-  returns all auctions. SELECT * FROM auction did not work.
-  */
+    /**
+     *
+     * @param auctionId
+     * @return
+     */
+    public Bid getBid(long auctionId){
+        Query query = em.createQuery("SELECT b FROM Bid b WHERE b.bid = (SELECT MAX(b.bid) FROM Bid b WHERE CAST(b.auction.id AS VARCHAR(10)) LIKE CAST (?1 AS VARCHAR(10)))");
+        query.setParameter(1, auctionId).setMaxResults(1);
+        try{
+            Bid bid = (Bid)query.getSingleResult();
+            return bid;
+        }catch(NoResultException e){
+            
+        }
+        return null;
+    }
+    public void saveBid(Bid b) {
+        em.persist(b);
+    }
   
 }

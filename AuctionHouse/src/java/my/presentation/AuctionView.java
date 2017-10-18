@@ -8,6 +8,7 @@ package my.presentation;
 import boundary.AuctionFacade;
 import com.sun.corba.se.impl.orbutil.concurrent.Mutex;
 import entities.Auction;
+import entities.Bid;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
@@ -60,43 +61,32 @@ public class AuctionView implements Serializable {
         return "auction";
     }
 
-public String onCheck()throws IOException{
+public String bidOnAuction()throws IOException{
     Integer currentBid=null;
     FacesContext context = FacesContext.getCurrentInstance();
-    HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-    //TODO checkif timeout on auction
-    //TODO lock for single user only. or is this impl when trying to update same object in db
-    Mutex mutex= new Mutex();
-        try {
-      mutex.acquire();
-      try {
-          
+    HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();   
     if((bid.equals("") || conversation == null)&& !singelton.isLoggedIn() ) {
         return "";
     }
     else{
      try{
             currentBid=Integer.parseInt(bid);
-        }catch(Exception e){
+        }catch(NumberFormatException e){
             return"";
         }
-        if( currentBid > auction.getBid() ){
-            auction.setBid(currentBid);
-            auction.setBidOwner(singelton.getUser());
-            this.auctionFacade.edit(auction);
+        if( currentBid > auctionFacade.getBid(Long.parseLong(id)).getBid() ){
+            Bid bid = new Bid();
+            
+            bid.setBid(currentBid);
+            bid.setUser(singelton.getUser());
+            bid.setAuction(auction);
+            this.auctionFacade.saveBid(bid);
             end();
             response.sendRedirect("index.xhtml?Success");
-        }else if (currentBid < auction.getBid() ){
+        }else if (currentBid < auctionFacade.getBid(Long.parseLong(id)).getBid() ){
             return "";
         }
     }
-      } finally {
-        mutex.release();
-      }
-    } catch(InterruptedException ie) {
-      // ...
-    }
-   
     return "";
 }
 
@@ -119,8 +109,16 @@ public String onCheck()throws IOException{
     }
 
 
- public Auction getAuction() {
+    public Auction getAuction() {
         return auction;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getAuctionBid(){
+        return this.auctionFacade.getBid(Long.parseLong(id)).getBid();
     }
 
     public void setAuction(Auction auction) {

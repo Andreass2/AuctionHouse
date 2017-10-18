@@ -83,7 +83,7 @@ public class YourSummaryView {
         response.sendRedirect(uri);
     }
     public void RateAuction(Auction auction){
-        auction.setBid(newRating);
+        auction.setRating(newRating);
         auctionFacade.edit(auction);
         AppUser user = auction.getAuctionOwner();
         List<Double> ratings = user.getFeedbacks();

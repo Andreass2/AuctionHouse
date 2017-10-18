@@ -25,7 +25,7 @@
                 <h:outputText value="#{auction.auctionName}" />
             </p:column>
             <p:column headerText="Current bid">
-                <h:outputText value="#{auction.bid}" />
+                <h:outputText value="#{homeView.getBid(auction.id)}" />
             </p:column>
             <p:column filterBy="#{auction.category}" headerText="Category" filterMatchMode="exact">
                 <f:facet name="filter">

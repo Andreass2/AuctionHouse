@@ -26,8 +26,6 @@ public class Auction implements Serializable {
     private Long id; 
     private AppUser auctionOwner;
     private String auctionName;
-    private Integer bid;
-    private AppUser bidOwner;
     private boolean status;
     private Date timeCreated;
     private String description;
@@ -67,22 +65,6 @@ public class Auction implements Serializable {
         this.categoryType = categoryType;
     }
     private CategoryType categoryType;
-
-
-    public AppUser getBidOwner() {
-        return bidOwner;
-    }
-
-    public void setBidOwner(AppUser bidOwner) {
-        this.bidOwner = bidOwner;
-    }
-    public Integer getBid() {
-        return bid;
-    }
-
-    public void setBid(Integer bid) {
-        this.bid = bid;
-    }
 
     public boolean isStatus() {
         return status;

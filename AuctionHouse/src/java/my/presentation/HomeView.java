@@ -77,6 +77,9 @@ public class HomeView {
         }
  
     }
+    public int getBid(long id){
+        return this.auctionFacade.getBid(id).getBid();
+    }
     
     public String goToHome(){
         return "index";
