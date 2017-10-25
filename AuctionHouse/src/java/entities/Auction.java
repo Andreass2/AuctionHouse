@@ -7,11 +7,15 @@ package entities;
 
 import enumclasses.CategoryType;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -32,6 +36,8 @@ public class Auction implements Serializable {
     private double rating;
     private String category;
     private boolean finished;
+    @OneToMany
+    private List<Bid> bids;
 
     public boolean isFinished() {
         return finished;
@@ -39,6 +45,14 @@ public class Auction implements Serializable {
 
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
     }
 
     public String getCategory() {
