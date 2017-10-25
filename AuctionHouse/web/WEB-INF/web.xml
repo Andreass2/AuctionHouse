@@ -33,4 +33,20 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+    <security-constraint>
+        <display-name>User Access</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected User Area</web-resource-name>
+            <description/>
+            <url-pattern>/faces/users/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>User</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-role>
+        <description/>
+        <role-name>User</role-name>
+    </security-role>
 </web-app>
