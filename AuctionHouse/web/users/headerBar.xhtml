@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      
+      <h:form>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <h:commandLink class="navbar-brand" action="#{homeView.goToHome}" value="Auction House"></h:commandLink>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li><h:commandLink action="#{auctionSchemaView.goToNewAuction}" value="Create Auction"></h:commandLink></li>
+                        <li><h:commandLink action="#{yourAuctionsView.goToYourAuctions}" value="Your Auctions"></h:commandLink></li>
+                        <li><h:commandLink action="#{yourSummaryView.goToYourPurchases}" value="Your Purchases"></h:commandLink></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><h:commandLink action="#{loginView.goToLogin}" value="Login" rendered="#{!loginView.isLoggedIn}"></h:commandLink></li>
+                        <li><h:commandLink action="#{loginView.goToSignUp}" value="Sign up" rendered="#{!loginView.isLoggedIn}"></h:commandLink></li>
+                        <li><h:commandLink action="#{loginView.logout}" value="Log out" rendered="#{loginView.isLoggedIn}"></h:commandLink></li>
+                    </ul>
+                </div>
+            </nav>
+        </h:form>
+</html>
+
