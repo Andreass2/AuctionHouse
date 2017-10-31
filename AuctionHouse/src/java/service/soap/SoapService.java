@@ -7,11 +7,13 @@ package service.soap;
 
 import boundary.AuctionFacade;
 import entities.Auction;
+import entities.Bid;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.ejb.Stateless;
+import javax.jms.Message;
 
 /**
  *
@@ -35,9 +37,25 @@ public class SoapService {
     public List<Auction> getActiveAuctions() {
         return auctionFacade.findAllAuctions();
     }
-    /*
+    
     @WebMethod(operationName = "bidForAuction")
-    public Message bidForAuction(Bid newBid) {
-        return auctionFacade;
-    }*/
+    public String bidForAuction(String newBid, String id) {
+        Integer currentBid = null;  
+        try{
+            currentBid=Integer.parseInt(newBid);
+        }catch(NumberFormatException e){
+            return"Exception";
+        }
+        if( currentBid > auctionFacade.getBid(Long.parseLong(id)).getBid() ){
+            Bid bid = new Bid();
+            
+            bid.setBid(currentBid);
+            bid.setUser(null);
+            bid.setAuction(auctionFacade.find(Long.parseLong(id)));
+            this.auctionFacade.saveBid(bid);
+        }else if (currentBid < auctionFacade.getBid(Long.parseLong(id)).getBid() ){
+            return "For lavt";
+        }
+    return "Fungerer"; 
+    }
 }
