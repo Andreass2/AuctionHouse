@@ -23,6 +23,7 @@ import publisher.PublisherPlainJava;
 public class MainTest {
     public static void main(String[] args) throws Exception
     {
+        /*
        PublisherPlainJava testPublisher=new PublisherPlainJava();
 
        testPublisher.PublishAuctionWinner(1);
@@ -58,6 +59,7 @@ public class MainTest {
        System.out.println("Message published: " + message.getText());
                                                                            
        // close the topic connection
-       topicConn.close();        
+       topicConn.close();   
+*/
     }
 }

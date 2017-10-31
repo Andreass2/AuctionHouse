@@ -75,7 +75,8 @@ public class PublisherPlainJava{
     
        
         
-       
-    
-   
+ public static void main(String []args ) throws Exception{
+      PublisherPlainJava testPublisher=new PublisherPlainJava();    
+       testPublisher.PublishAuctionWinner(1);
+ }  
 }
