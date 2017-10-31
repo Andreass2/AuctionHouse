@@ -17,6 +17,7 @@ import javax.jms.TopicPublisher;
 import javax.jms.TopicSession;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import my.presentation.AuctionSchemaView;
 
 /**
  *
@@ -31,7 +32,20 @@ public class PublisherPlainJava{
 
     public PublisherPlainJava() {
          try{
-            // get the initial context
+          
+
+             
+             
+           
+        }
+        catch(Exception e){
+            //TODO 
+        }
+    }//
+    
+    public void PublishAuctionWinner(String name, String pName, String url){
+            try{
+                  // get the initial context
              InitialContext ctx = new InitialContext();
 
              // lookup the topic object
@@ -40,6 +54,11 @@ public class PublisherPlainJava{
              // lookup the topic connection factory
               connFactory = (TopicConnectionFactory) ctx.
                  lookup("jmsConnectionFactory");
+                
+               
+                
+                 // create a topic connection
+              topicConn = connFactory.createTopicConnection();
 
              // create a topic session
               topicSession = topicConn.createTopicSession(false,
@@ -47,36 +66,25 @@ public class PublisherPlainJava{
 
              // create a topic publisher
               topicPublisher = topicSession.createPublisher(topic);
-             topicPublisher.setDeliveryMode(DeliveryMode.NON_PERSISTENT);            
-        }
-        catch(NamingException | JMSException e){
-            //TODO 
-        }
-    }//
-    
-    public void PublishAuctionWinner(int auctionId)throws Exception{
-        
-         // create a topic connection
-             topicConn = connFactory.createTopicConnection();
-         
-             // create the "Hello World" message
+             topicPublisher.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+             
+             
+             
+             
+             // create the message
              TextMessage message = topicSession.createTextMessage();
-             message.setText(auctionId+"");
+             message.setText(name+"|"+pName +"|"+url );
 
              // publish the messages
              topicPublisher.publish(message);
 
-             // print what we did
-             System.out.println("Message published: " + message.getText());
-
-             // close the topic connection
-             topicConn.close();     
+            }
+            catch(JMSException | NamingException ee){
+                //handle jsm 
+                System.exit(0);
+            }
     }
-    
-       
-        
- public static void main(String []args ) throws Exception{
-      PublisherPlainJava testPublisher=new PublisherPlainJava();    
-       testPublisher.PublishAuctionWinner(1);
- }  
+
 }
+
+ 
