@@ -8,17 +8,17 @@
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <h:commandLink class="navbar-brand" action="#{homeView.goToHome}" value="Auction House"></h:commandLink>
+                        <h:commandLink class="navbar-brand" action="/index?faces-redirect=true" value="Auction House"></h:commandLink>
                     </div>
                     <ul class="nav navbar-nav">
-                        <li><h:commandLink action="#{auctionSchemaView.goToNewAuction}" value="Create Auction"></h:commandLink></li>
-                        <li><h:commandLink action="#{yourAuctionsView.goToYourAuctions}" value="Your Auctions"></h:commandLink></li>
-                        <li><h:commandLink action="#{yourSummaryView.goToYourPurchases}" value="Your Purchases"></h:commandLink></li>
+                        <li><h:commandLink action="/users/auctionSchema?faces-redirect=true" value="Create Auction"></h:commandLink></li>
+                        <li><h:commandLink action="/users/yourAuctions?faces-redirect=true" value="Your Auctions"></h:commandLink></li>
+                        <li><h:commandLink action="/users/yourSummary?faces-redirect=true" value="Your Purchases"></h:commandLink></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><h:commandLink action="#{loginView.goToLogin}" value="Login" rendered="#{!loginView.isLoggedIn}"></h:commandLink></li>
-                        <li><h:commandLink action="#{loginView.goToSignUp}" value="Sign up" rendered="#{!loginView.isLoggedIn}"></h:commandLink></li>
-                        <li><h:commandLink action="#{loginView.logout}" value="Log out" rendered="#{loginView.isLoggedIn}"></h:commandLink></li>
+                        <li><h:commandLink action="/login?faces-redirect=true" value="Login" rendered="#{!loginView.isLoggedIn()}"></h:commandLink></li>
+                        <!--<li><h:commandLink action="signup?faces-redirect=true" value="Sign up" rendered="#{!loginView.isLoggedIn()}"></h:commandLink></li>-->
+                        <li><h:commandLink action="#{loginView.logout()}" value="Log out" rendered="#{loginView.isLoggedIn()}"></h:commandLink></li>
                     </ul>
                 </div>
             </nav>

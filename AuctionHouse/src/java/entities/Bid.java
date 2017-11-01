@@ -28,7 +28,7 @@ public class Bid implements Serializable {
     private Long id;
     @ManyToOne
     private Auction auction;
-    private AppUser user; 
+    private String bidOwner; 
     private int bid; 
 
     public Auction getAuction() {
@@ -39,12 +39,12 @@ public class Bid implements Serializable {
         this.auction = auction;
     }
 
-    public AppUser getUser() {
-        return user;
+    public String getBidOwner() {
+        return bidOwner;
     }
 
-    public void setUser(AppUser user) {
-        this.user = user;
+    public void setBidOwner(String bidOwner) {
+        this.bidOwner = bidOwner;
     }
 
     public int getBid() {

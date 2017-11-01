@@ -13,15 +13,15 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author addi2
  */
 @ManagedBean(name="homeView")
-@ViewScoped
+@RequestScoped
 public class HomeView {
     @EJB
     AuctionFacade auctionFacade;
@@ -82,6 +82,6 @@ public class HomeView {
     }
     
     public String goToHome(){
-        return "index";
+        return "/index?faces-redirect=true";
     }
 }

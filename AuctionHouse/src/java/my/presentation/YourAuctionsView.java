@@ -12,7 +12,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import singelton.SingeltonClass;
+import javax.faces.context.FacesContext;
 
 /**
  * JSF Managed Bean
@@ -23,28 +23,22 @@ import singelton.SingeltonClass;
 public class YourAuctionsView {
      @EJB
     AuctionFacade auctionFacade;
-    SingeltonClass singelton;
 
     /**
      * Creates a new instance of YourAuctionsView
      */
     public YourAuctionsView() {
-        singelton= SingeltonClass.getInstance();
     }
    
     
       // Returns all auctions
     public List<Auction> getYourAuctions(){
-       return auctionFacade.findYourAuctions(singelton.getUser().getId());
+        String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+       return auctionFacade.findYourAuctions(username);
     }
-    
-       //send user to auctionSchema.xhtml if user is authorized
-    public String goToYourAuctions(){
-        //TODO check if user is logged in or not. true if logged in
-        boolean loggedIn=singelton.isLoggedIn();
-  
-        String uri=(loggedIn)?"yourAuctions":"login";      
-        return uri;
+   
+    public String goToYourAuctions(){    
+        return "/users/yourAuctions?faces-redirect=true";
     }
     public void startAuction(Auction auction ){
         auction.setStatus(true);

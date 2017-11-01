@@ -8,17 +8,11 @@ package my.presentation;
 
 import entities.Auction;
 import boundary.AuctionFacade;
-import static com.sun.faces.facelets.util.Path.context;
-import entities.AppUser;
-import entities.Bid;
 import enumclasses.CategoryType;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.servlet.http.HttpServletResponse;
-import singelton.SingeltonClass;
-import java.lang.Exception;
 import java.util.Arrays;
 import java.util.List;
 import javax.faces.context.FacesContext;
@@ -35,7 +29,6 @@ public class AuctionSchemaView {
     AuctionFacade auctionFacade;
     Auction auction;
     int bid;
-    SingeltonClass singelton;
     List<CategoryType> categorys; 
 
     public int getBid() {
@@ -54,7 +47,6 @@ public class AuctionSchemaView {
     public AuctionSchemaView() {
         this.auction=new Auction();
         this.setBid(0);
-        singelton = SingeltonClass.getInstance();
         this.categorys = Arrays.asList(CategoryType.values());        
 
     }
@@ -63,12 +55,8 @@ public class AuctionSchemaView {
         return categorys;
     }
     
-    //send user to auctionSchema.xhtml if user is authorized
-    public String goToNewAuction(){
-        //TODO check if user is logged in or not. true if logged in
-        boolean loggedIn=singelton.isLoggedIn();
-        String uri=(loggedIn)?"auctionSchema":"login";      
-        return uri;
+    public String goToNewAuction(){  
+        return "/users/auctionSchema?faces-redirect=true";
     }
     
     //gives faclets acces to write data to entity object
@@ -98,17 +86,14 @@ public class AuctionSchemaView {
         return seconds;
     }
     
-     // Saves the auctions and then returns the string path "index"
-    public void postAuction() throws Exception{
-        AppUser user = singelton.getUser();
+    public String postAuction() throws Exception{
+        String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
         auction.setStatus(false);
-        auction.setAuctionOwner(user);
+        auction.setAuctionOwner(username);
         auction.setFinished(false);
-        this.auctionFacade.createAuction(auction, bid, user);
+        this.auctionFacade.createAuction(auction, bid, username);
         auction = new Auction();
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-        response.sendRedirect("yourAuctions.xhtml");
+        return "/users/yourAuctions?faces-redirect=true";
     }
 }
     

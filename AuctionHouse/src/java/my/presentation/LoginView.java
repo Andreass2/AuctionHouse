@@ -8,12 +8,11 @@ package my.presentation;
 import boundary.AppUserFacade;
 import entities.AppUser;
 import java.io.IOException;
+import java.security.Principal;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletResponse;
-import singelton.SingeltonClass;
 
 /**
  *
@@ -29,18 +28,12 @@ public class LoginView {
     private AppUser newUser;
     private String newUserPassword2;
     private boolean errorLogin;
-    SingeltonClass singelton;
-    private boolean isLoggedIn;
 
    
     public LoginView() {
         this.user = new AppUser();
         this.newUser = new AppUser();
-        singelton = SingeltonClass.getInstance();
-        isLoggedIn= singelton.isLoggedIn();
     }
-    
-    
     
     public AppUser getNewUser() {
         return newUser;
@@ -71,64 +64,34 @@ public class LoginView {
         return user;
     }
     
-    public void goToLogin() throws IOException{
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-        response.sendRedirect("login.xhtml");
+    public String goToLogin() throws IOException{
+        return "login.xhtml";
     }
     
-    public void goToSignUp() throws IOException{
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-        response.sendRedirect("signup.xhtml");
+    public String goToSignUp() throws IOException{
+        return "signup?faces-redirect=true";
     }
     
-    public void login() throws IOException{
-        AppUser authorizedUser = userFacade.Login(user.getEmail(), user.getPassword());
-        if(authorizedUser != null){
-            user = authorizedUser;
-            singelton.setLoggedIn(true);
-            singelton.setUser(user);
-            isLoggedIn=true;
-            FacesContext context = FacesContext.getCurrentInstance();
-            HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-            response.sendRedirect("index.xhtml");
-        }else{
-            user = new AppUser();
-            errorLogin = true;
-            FacesContext context = FacesContext.getCurrentInstance();
-            HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-            response.sendRedirect("login.xhtml");
-        }
-    }
-    public void register() throws IOException{
+
+    /*public String register() throws IOException{
         if(!newUser.getEmail().equals("") && !newUser.getPassword().equals("") && newUser.getPassword().equals(newUserPassword2)){
             userFacade.create(newUser);
             user = newUser; 
-            singelton.setLoggedIn(true);
-            singelton.setUser(user);
             isLoggedIn=true;
-            FacesContext context = FacesContext.getCurrentInstance();
-            HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-            response.sendRedirect("index.xhtml");
+            return "index.xhtml";
         }
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-        response.sendRedirect("signup.xhtml");
+        return "signup.xhtml";
+    }*/
+    public String logout() throws IOException {
+        //user = new AppUser(); 
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "/login.xhtml?faces-redirect=true";
     }
-    public void logout() throws IOException {
-        user = new AppUser(); 
-        singelton.setLoggedIn(false); 
-        isLoggedIn=false;
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-        response.sendRedirect("login.xhtml");
+    public boolean isLoggedIn(){
+        Principal user = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
+        if(user == null || user.getName() == null || user.getName().equals("")){
+            return false;
+        }
+        return true;
     }
-    
-     public boolean isIsLoggedIn() {
-        return isLoggedIn;
-    }
-
-    
-    
 }

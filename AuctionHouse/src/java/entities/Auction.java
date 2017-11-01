@@ -28,7 +28,7 @@ public class Auction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; 
-    private AppUser auctionOwner;
+    private String auctionOwner;
     private String auctionName;
     private boolean status;
     private Date timeCreated;
@@ -96,11 +96,11 @@ public class Auction implements Serializable {
         this.auctionName = auctionName;
     }
 
-    public AppUser getAuctionOwner() {
+    public String getAuctionOwner() {
         return auctionOwner;
     }
 
-    public void setAuctionOwner(AppUser auctionOwner) {
+    public void setAuctionOwner(String auctionOwner) {
         this.auctionOwner = auctionOwner;
     }
 

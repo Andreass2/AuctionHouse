@@ -47,16 +47,16 @@ public class AuctionFacade extends AbstractFacade<Auction> {
         return  list;
     }
     //dynamic queris 
-    public List<Auction> findYourAuctions(long ownerId) {
-        Query query = em.createQuery("SELECT a FROM Auction a WHERE CAST(a.auctionOwner.id AS VARCHAR(10)) LIKE CAST(?1 AS VARCHAR(10)) AND a.finished = false");
-        query.setParameter(1, ownerId);
+    public List<Auction> findYourAuctions(String owner) {
+        Query query = em.createQuery("SELECT a FROM Auction a WHERE a.auctionOwner LIKE ?1 AND a.finished = false");
+        query.setParameter(1, owner);
         List<Auction> list= query.getResultList();
         return  list;
     }
-        public List<Auction> findYourPurchases(long ownerId) {
+        public List<Auction> findYourPurchases(String owner) {
             //change to bidOwner
-        Query query = em.createQuery("SELECT a FROM Auction a WHERE CAST(a.bidOwner.id AS VARCHAR(10)) LIKE CAST(?1 AS VARCHAR(10)) AND a.finished = true");
-        query.setParameter(1, ownerId);
+        Query query = em.createQuery("SELECT a FROM Auction a WHERE a.bidOwner LIKE ?1 AND a.finished = true");
+        query.setParameter(1, owner);
         List<Auction> list= query.getResultList();
         return  list;
     }
@@ -65,12 +65,12 @@ public class AuctionFacade extends AbstractFacade<Auction> {
         query.setParameter(1, auctionId);
         query.executeUpdate();
     }
-    public void createAuction(Auction auction, int bid, AppUser user) {
+    public void createAuction(Auction auction, int bid, String user) {
         this.create(auction);
         Bid b = new Bid();
         b.setAuction(auction);
         b.setBid(bid);
-        b.setUser(user);
+        b.setBidOwner(user);
         em.persist(b);
     }
 

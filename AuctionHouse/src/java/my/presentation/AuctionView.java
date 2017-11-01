@@ -16,8 +16,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
-import singelton.SingeltonClass;
 
 /**
  *
@@ -33,14 +31,12 @@ public class AuctionView implements Serializable {
     private String bid;
     @Inject
     private Conversation conversation;
-    SingeltonClass singelton;
 
 
     /**
      * Creates a new instance of testConversationJsfBean
      */
     public AuctionView() {
-        singelton=SingeltonClass.getInstance();
     }
     
     
@@ -57,36 +53,35 @@ public class AuctionView implements Serializable {
     public String onStart() {
        start();
        auction = auctionFacade.find(Long.parseLong(id));
-        return "auction";
+        return "/users/auction?faces-redirect=true";
     }
 
 public String bidOnAuction()throws IOException{
     Integer currentBid=null;
-    FacesContext context = FacesContext.getCurrentInstance();
-    HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();   
-    if((bid.equals("") || conversation == null)&& !singelton.isLoggedIn() ) {
+    String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+    if((bid.equals("") || conversation == null || username == null || username.equals("") )) {
         return "";
     }
     else{
      try{
             currentBid=Integer.parseInt(bid);
         }catch(NumberFormatException e){
-            return"";
+            return null;
         }
         if( currentBid > auctionFacade.getBid(Long.parseLong(id)).getBid() ){
             Bid bid = new Bid();
             
             bid.setBid(currentBid);
-            bid.setUser(singelton.getUser());
+            bid.setBidOwner(username);
             bid.setAuction(auction);
             this.auctionFacade.saveBid(bid);
             end();
-            response.sendRedirect("index.xhtml?Success");
+            return "/index.xhtml?faces-redirect=true";
         }else if (currentBid < auctionFacade.getBid(Long.parseLong(id)).getBid() ){
-            return "";
+            return null;
         }
     }
-    return "";
+    return null;
 }
 
 // Getters & Setters
