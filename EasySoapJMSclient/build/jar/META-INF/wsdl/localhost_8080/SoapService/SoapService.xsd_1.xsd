@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://soap.service/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://soap.service/">
+
+<xs:element name="bidForAuction" type="tns:bidForAuction"/>
+
+<xs:element name="bidForAuctionResponse" type="tns:bidForAuctionResponse"/>
+
+<xs:element name="getActiveAuctions" type="tns:getActiveAuctions"/>
+
+<xs:element name="getActiveAuctionsResponse" type="tns:getActiveAuctionsResponse"/>
+
+<xs:complexType name="bidForAuction">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="bidForAuctionResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getActiveAuctions">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getActiveAuctionsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:auction" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="auction">
+<xs:sequence>
+<xs:element name="auctionName" type="xs:string" minOccurs="0"/>
+<xs:element name="auctionOwner" type="tns:appUser" minOccurs="0"/>
+<xs:element name="bids" type="tns:bid" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="category" type="xs:string" minOccurs="0"/>
+<xs:element name="categoryType" type="tns:categoryType" minOccurs="0"/>
+<xs:element name="description" type="xs:string" minOccurs="0"/>
+<xs:element name="finished" type="xs:boolean"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="rating" type="xs:double"/>
+<xs:element name="status" type="xs:boolean"/>
+<xs:element name="timeCreated" type="xs:dateTime" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="appUser">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="feedbacks" type="xs:double" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="purchaseList" type="tns:auction" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="bid">
+<xs:sequence>
+<xs:element name="auction" type="tns:auction" minOccurs="0"/>
+<xs:element name="bid" type="xs:int"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="user" type="tns:appUser" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="categoryType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="ELECTRONIC"/>
+<xs:enumeration value="SPORTS"/>
+<xs:enumeration value="ANIMALS"/>
+<xs:enumeration value="FURNITURE"/>
+<xs:enumeration value="CLOTHES"/>
+<xs:enumeration value="GARDEN"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>
