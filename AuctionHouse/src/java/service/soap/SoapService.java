@@ -50,7 +50,7 @@ public class SoapService {
             Bid bid = new Bid();
             
             bid.setBid(currentBid);
-            bid.setUser(null);
+            bid.setBidOwner(null);
             bid.setAuction(auctionFacade.find(Long.parseLong(id)));
             this.auctionFacade.saveBid(bid);
         }else if (currentBid < auctionFacade.getBid(Long.parseLong(id)).getBid() ){
